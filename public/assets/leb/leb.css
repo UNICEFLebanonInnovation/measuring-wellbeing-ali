@@ -1,0 +1,115 @@
+.error,.m-form__help{
+	color: #ff0404 !important;
+	padding-top: 6px;
+}
+
+.m-form__help{
+	font-size: 15px !important;
+}
+
+.m-login.m-login--2 .m-login__wrapper .m-login__container .m-login__form .m-login__form-action .m-login__btn{
+	background-color: #0077c0 !important;
+    border-color: #0077c0 !important;
+}
+
+.m-login.m-login--2.m-login-2--skin-3 .m-login__container .m-login__form .form-control{
+	color: #000 !important;
+    background: #fff !important;
+    border:1px solid black !important;
+}
+
+.m-header, .m-brand, .m-aside-left.m-aside-left--skin-dark, .m-aside-menu.m-aside-menu--skin-dark{
+	background-color :  #0077c0 !important;
+}
+
+.m-aside-menu.m-aside-menu--skin-dark .m-menu__nav > .m-menu__item > .m-menu__heading .m-menu__link-text, .m-aside-menu.m-aside-menu--skin-dark .m-menu__nav > .m-menu__item > .m-menu__link .m-menu__link-text{
+	color: #fff !important;
+}
+
+.m-aside-menu.m-aside-menu--skin-dark .m-menu__nav > .m-menu__item.m-menu__item--active > .m-menu__heading .m-menu__link-icon, .m-aside-menu.m-aside-menu--skin-dark .m-menu__nav > .m-menu__item.m-menu__item--active > .m-menu__link .m-menu__link-icon{
+	color: #fff !important;
+}
+
+.m-aside-menu.m-aside-menu--skin-dark .m-menu__nav > .m-menu__item.m-menu__item--active > .m-menu__heading, .m-aside-menu.m-aside-menu--skin-dark .m-menu__nav > .m-menu__item.m-menu__item--active > .m-menu__link{
+	background-color: #36a3f7 !important;
+}
+
+.m-aside-menu.m-aside-menu--skin-dark .m-menu__nav > .m-menu__item > .m-menu__heading .m-menu__link-icon, .m-aside-menu.m-aside-menu--skin-dark .m-menu__nav > .m-menu__item > .m-menu__link .m-menu__link-icon {
+    color: #ffffff !important;
+}
+
+.m-aside-menu.m-aside-menu--skin-dark .m-menu__nav > .m-menu__item.m-menu__item--active > .m-menu__heading .m-menu__ver-arrow, .m-aside-menu.m-aside-menu--skin-dark .m-menu__nav > .m-menu__item.m-menu__item--active > .m-menu__link .m-menu__ver-arrow{
+	color: #ffffff !important;
+}
+
+.m-aside-menu.m-aside-menu--skin-dark .m-menu__nav > .m-menu__item .m-menu__submenu .m-menu__item:not(.m-menu__item--parent):not(.m-menu__item--open):not(.m-menu__item--expanded):not(.m-menu__item--active):hover > .m-menu__heading .m-menu__link-text, .m-aside-menu.m-aside-menu--skin-dark .m-menu__nav > .m-menu__item .m-menu__submenu .m-menu__item:not(.m-menu__item--parent):not(.m-menu__item--open):not(.m-menu__item--expanded):not(.m-menu__item--active):hover > .m-menu__link .m-menu__link-text{
+	color: #ffffff !important;
+}
+
+.dataTables_wrapper .pagination .page-item.active > .page-link{
+	background: #0077c0 !important;
+}
+
+.m-topbar .m-topbar__nav.m-nav > .m-nav__item > .m-nav__link{
+	color: #fff !important;
+}
+
+
+.m-checkbox.m-checkbox--light > span:after{
+	border: solid #080808;
+}
+
+.m-checkbox.m-checkbox--light > input:checked ~ span{
+	border: 1px solid #060606;
+}
+
+.m-checkbox.m-checkbox--light > span{
+	border: 1px solid #060606;
+}
+
+.m-aside-menu.m-aside-menu--skin-dark .m-menu__nav > .m-menu__item .m-menu__submenu .m-menu__item > .m-menu__heading .m-menu__link-text, .m-aside-menu.m-aside-menu--skin-dark .m-menu__nav > .m-menu__item .m-menu__submenu .m-menu__item > .m-menu__link .m-menu__link-text {
+    color: #ffffff;
+}
+
+.range_label{
+	margin-top: 10px;
+    padding-left: 80px;
+}
+
+.graph_filter{
+	padding: 0px 10px 0px 10px;
+}
+
+.has-error{
+	border-color: #ff0404 !important;
+}
+
+
+
+
+@media (max-width: 600px) {
+
+	#m_aside_left_offcanvas_toggle, 
+	#m_aside_header_topbar_mobile_toggle,
+	#m_aside_header_menu_mobile_toggle { display:none!important; }
+	
+	.m-login__logo img{ 
+		width: 300px; height: 240px;
+	}
+	.m-brand__logo-wrapper img{ 
+		width: 115px;
+		height: 50px;
+		margin: 0!important;
+	}
+
+	table.dataTable td:nth-child(4),table.dataTable th:nth-child(4),
+    table.dataTable td:nth-child(5),table.dataTable th:nth-child(5),
+    table.dataTable td:nth-child(6),table.dataTable th:nth-child(6),
+    table.dataTable td:nth-child(7),table.dataTable th:nth-child(7),
+    table.dataTable td:nth-child(8),table.dataTable th:nth-child(8),
+    table.dataTable td:nth-child(9),table.dataTable th:nth-child(9),
+    table.dataTable td:nth-child(10),table.dataTable th:nth-child(10) {
+      display: none;
+    }
+	
+}

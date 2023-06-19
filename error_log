@@ -1,0 +1,34 @@
+[21-Jan-2020 10:45:35 UTC] PHP Notice:  Undefined index: argv in /home/robertexperi77/public_html/sdq/vendor/symfony/console/Input/ArgvInput.php on line 52
+[21-Jan-2020 10:45:35 UTC] PHP Warning:  array_shift() expects parameter 1 to be array, null given in /home/robertexperi77/public_html/sdq/vendor/symfony/console/Input/ArgvInput.php on line 56
+[21-Jan-2020 10:45:50 UTC] PHP Notice:  Undefined index: argv in /home/robertexperi77/public_html/sdq/vendor/symfony/console/Input/ArgvInput.php on line 52
+[21-Jan-2020 10:45:50 UTC] PHP Warning:  array_shift() expects parameter 1 to be array, null given in /home/robertexperi77/public_html/sdq/vendor/symfony/console/Input/ArgvInput.php on line 56
+[21-Jan-2020 10:46:03 UTC] PHP Notice:  Undefined index: argv in /home/robertexperi77/public_html/sdq/vendor/symfony/console/Input/ArgvInput.php on line 52
+[21-Jan-2020 10:46:03 UTC] PHP Warning:  array_shift() expects parameter 1 to be array, null given in /home/robertexperi77/public_html/sdq/vendor/symfony/console/Input/ArgvInput.php on line 56
+[03-Apr-2020 13:09:39 Asia/Beirut] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 98570240 bytes) in /home/hqpyj8xflnii/public_html/staging/routes/web.php on line 71
+[03-Apr-2020 13:09:45 Asia/Beirut] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 98570240 bytes) in /home/hqpyj8xflnii/public_html/staging/routes/web.php on line 71
+[03-Apr-2020 13:10:05 Asia/Beirut] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 98570240 bytes) in /home/hqpyj8xflnii/public_html/staging/routes/web.php on line 71
+[03-Apr-2020 13:10:07 Asia/Beirut] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 98570240 bytes) in /home/hqpyj8xflnii/public_html/staging/routes/web.php on line 71
+[03-Apr-2020 13:11:51 Asia/Beirut] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 98570240 bytes) in /home/hqpyj8xflnii/public_html/staging/routes/web.php on line 71
+[03-Apr-2020 13:11:56 Asia/Beirut] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 98570240 bytes) in /home/hqpyj8xflnii/public_html/staging/routes/web.php on line 71
+[03-Apr-2020 13:12:24 Asia/Beirut] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 98570240 bytes) in /home/hqpyj8xflnii/public_html/staging/routes/web.php on line 71
+[03-Apr-2020 13:12:27 Asia/Beirut] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 98570240 bytes) in /home/hqpyj8xflnii/public_html/staging/routes/web.php on line 71
+[03-Apr-2020 13:12:32 Asia/Beirut] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 98570240 bytes) in /home/hqpyj8xflnii/public_html/staging/routes/web.php on line 71
+[03-Apr-2020 13:13:51 Asia/Beirut] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 98570240 bytes) in /home/hqpyj8xflnii/public_html/staging/routes/web.php on line 69
+[03-Apr-2020 13:13:53 Asia/Beirut] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 98570240 bytes) in /home/hqpyj8xflnii/public_html/staging/routes/web.php on line 69
+[03-Apr-2020 13:18:21 Asia/Beirut] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 98570240 bytes) in /home/hqpyj8xflnii/public_html/staging/routes/web.php on line 68
+[03-Apr-2020 13:18:40 Asia/Beirut] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 98570240 bytes) in /home/hqpyj8xflnii/public_html/staging/routes/web.php on line 68
+[03-Apr-2020 14:13:47 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function phpphpinfo() in /home/hqpyj8xflnii/public_html/prod/public/index.php:1
+Stack trace:
+#0 /home/hqpyj8xflnii/public_html/prod/index.php(41): require_once()
+#1 {main}
+  thrown in /home/hqpyj8xflnii/public_html/prod/public/index.php on line 1
+[03-Apr-2020 14:13:52 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function phpphpinfo() in /home/hqpyj8xflnii/public_html/prod/public/index.php:1
+Stack trace:
+#0 /home/hqpyj8xflnii/public_html/prod/index.php(41): require_once()
+#1 {main}
+  thrown in /home/hqpyj8xflnii/public_html/prod/public/index.php on line 1
+[03-Apr-2020 14:13:53 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function phpphpinfo() in /home/hqpyj8xflnii/public_html/prod/public/index.php:1
+Stack trace:
+#0 /home/hqpyj8xflnii/public_html/prod/index.php(41): require_once()
+#1 {main}
+  thrown in /home/hqpyj8xflnii/public_html/prod/public/index.php on line 1
