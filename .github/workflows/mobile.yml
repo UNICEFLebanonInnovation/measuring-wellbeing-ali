@@ -13,6 +13,9 @@ on:
         description: Server address baked into the APK as the default
         default: https://measuringwellbeing.org
         required: false
+      release_tag:
+        description: Publish the APK as a GitHub release with this tag (e.g. mobile-v2.0.0); the tag is created on the built commit if missing
+        required: false
 
 env:
   FLUTTER_VERSION: 3.47.7
@@ -131,12 +134,14 @@ jobs:
           retention-days: 90
 
       - name: Attach APK to the release
-        if: startsWith(github.ref, 'refs/tags/mobile-v')
+        if: startsWith(github.ref, 'refs/tags/mobile-v') || inputs.release_tag != ''
         env:
           GH_TOKEN: ${{ github.token }}
+          TAG: ${{ inputs.release_tag || github.ref_name }}
         run: |
           # Stable file name so the link to the latest release never changes:
           # https://github.com/<owner>/<repo>/releases/latest/download/measuring-wellbeing.apk
           cp build/app/outputs/flutter-apk/measuring-wellbeing-*.apk build/app/outputs/flutter-apk/measuring-wellbeing.apk
-          gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1 || gh release create "$GITHUB_REF_NAME" --generate-notes --title "Mobile app $GITHUB_REF_NAME"
-          gh release upload "$GITHUB_REF_NAME" build/app/outputs/flutter-apk/measuring-wellbeing.apk build/app/outputs/flutter-apk/measuring-wellbeing-*.apk --clobber
+          gh release view "$TAG" >/dev/null 2>&1 || gh release create "$TAG" --target "$GITHUB_SHA" --generate-notes --title "Mobile app $TAG"
+          gh release upload "$TAG" build/app/outputs/flutter-apk/measuring-wellbeing.apk build/app/outputs/flutter-apk/measuring-wellbeing-*.apk --clobber
+          echo "Download: https://github.com/$GITHUB_REPOSITORY/releases/download/$TAG/measuring-wellbeing.apk"
