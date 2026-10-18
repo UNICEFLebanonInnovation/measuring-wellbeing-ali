@@ -74,7 +74,7 @@ docker build -t measuring-wellbeing .
 | Azure infrastructure (Bicep) | Done | Compiles; first deployment pending an Azure subscription |
 | CI/CD (GitHub Actions) | Done | Needs OIDC app registration and repository secrets/variables |
 | Documentation | Done | Architecture, runbook, operations, API |
-| New mobile app | Pending | Offline-first client of `/api/v1`; old APK (sdq-12) analysed in `docs/MOBILE_APP_ANALYSIS.md` and keeps working through the legacy API meanwhile |
+| New mobile app (Flutter, `mobile/`) | Done | Offline-first Android client of `/api/v1` with EN/AR, encrypted local store and sync; APK built by `.github/workflows/mobile.yml`; see `docs/MOBILE_APP.md`. Old APK (sdq-12) analysed in `docs/MOBILE_APP_ANALYSIS.md` and keeps working through the legacy API meanwhile |
 | Azure Blob Storage for logos/exports | Pending | Storage account provisioned; Laravel adapter and `FILESYSTEM_DISK` switch to do |
 | Microsoft Entra ID sign-in for admins | Pending | Decision needed |
 | Scoring policy decision | Pending | `documented` by default; see `docs/ARCHITECTURE.md` section 7 |
@@ -87,5 +87,6 @@ docker build -t measuring-wellbeing .
 - [Migration runbook](docs/MIGRATION_RUNBOOK.md)
 - [Operations](docs/OPERATIONS.md)
 - [API contract](docs/API.md)
+- [Mobile application](docs/MOBILE_APP.md)
 - [Azure infrastructure](infra/README.md)
 - [Retained project documents](docs/README.md)
