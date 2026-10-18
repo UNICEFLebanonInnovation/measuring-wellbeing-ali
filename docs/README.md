@@ -26,3 +26,4 @@ Option A ("evolve") was chosen on 2026-10-18. The modernised application lives a
 - [MIGRATION_RUNBOOK.md](MIGRATION_RUNBOOK.md): export, restore, verification, UAT, cutover, rollback.
 - [OPERATIONS.md](OPERATIONS.md): logs, deployments, scaling, backups, secrets, common failures.
 - [../infra/README.md](../infra/README.md): Azure resources, one-time setup, CI/CD identity, costs.
+- [MOBILE_APP_ANALYSIS.md](MOBILE_APP_ANALYSIS.md): what the current Android app (sdq-12.apk) does, its API contract, local database and the specification for the rebuild; extracted strings and option lists are under `mobile-app/`.

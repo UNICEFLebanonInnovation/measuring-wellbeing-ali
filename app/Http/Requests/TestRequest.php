@@ -77,6 +77,7 @@ abstract class TestRequest extends FormRequest
 
     protected function prepareForValidation(): void
     {
+        $this->merge(FormOptions::normalise($this->all()));
         foreach (SdqItems::all() as $item) {
             if ($this->has($item) && is_string($this->input($item))) {
                 $this->merge([$item => strtolower($this->input($item))]);

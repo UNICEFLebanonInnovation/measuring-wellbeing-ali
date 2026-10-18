@@ -1,0 +1,294 @@
+{
+ "Considerate_of_other_peoples_feelings_array": {
+  "en": [
+   "",
+   "Not true",
+   "Somewhat true",
+   "Certainly true",
+   "No answer"
+  ],
+  "ar": [
+   "",
+   "غير صحيح",
+   "صحيح نوعاً ما",
+   "صحيح بالتأكيد",
+   "لا إجابة"
+  ]
+ },
+ "Do_the_child_receive_any": {
+  "en": [
+   "Case management",
+   "Community based Child protection activities",
+   "Formal Education",
+   "Non-formal education (VET programs…)",
+   "No"
+  ],
+  "ar": [
+   "إدارة حالة",
+   "أنشطة حماية الطفل المجتمعية",
+   "التعليم النظامي",
+   "التعليم غير الرسمي (برامج التعليم والتدريب المهني ، ...)",
+   "لا"
+  ]
+ },
+ "Dropout_reason": {
+  "en": [
+   "",
+   "Did Not Drop Out",
+   "Child was no longer allowed to access activity",
+   "Child said he did not want to participate in activity any longer",
+   "Relocation within Lebanon",
+   "Returned to Syria",
+   "Left for third country",
+   "Other reason"
+  ],
+  "ar": [
+   "",
+   "لم ينسحب",
+   "لم يسمح له بالمشاركة",
+   "لم يعد يرغب حضور النشاط",
+   "نقل إلى مكان آخر في لبنان",
+   "عاد إلى سوريا",
+   "غادر إلى بلد ثالث",
+   "سبب أخر"
+  ]
+ },
+ "activity_category_array": {
+  "en": [
+   "",
+   "Child Labour Activity",
+   "Child Marriage Activity",
+   "Violent Discipline Activity",
+   "Other"
+  ],
+  "ar": [
+   "",
+   "نشاط عمالة الاطفال",
+   "نشاط زواج الأطفال",
+   "نشاط الانضباط العنيف",
+   "نشاطات اخرى"
+  ]
+ },
+ "agency_name_array": {
+  "en": [
+   "",
+   "ABAAD",
+   "AMEL",
+   "AND",
+   "ARC",
+   "ASMAE",
+   "CARE International",
+   "Caritas Lebanon",
+   "CONECRN",
+   "Dorcas",
+   "Danish Refugee Council",
+   "Himaya",
+   "ICRC",
+   "Intersos",
+   "IOCC",
+   "IRC",
+   "KAFA",
+   "Makhzoumi Foundation",
+   "Mercy Corps",
+   "Mouvement Social",
+   "MSF",
+   "Nabad",
+   "NRC",
+   "RAHMA",
+   "RESTART",
+   "Renee Mouawad Foundation",
+   "RtP",
+   "Sanabel Al Janoub",
+   "SAWA",
+   "SCI",
+   "SIF",
+   "TDH-Italy",
+   "TDH-Lausanne",
+   "WCH",
+   "WVI",
+   "YNCA",
+   "MAP-UK",
+   "Other"
+  ],
+  "ar": [
+   "",
+   "ABAAD",
+   "AMEL",
+   "AND",
+   "ARC",
+   "ASMAE",
+   "CARE International",
+   "Caritas Lebanon",
+   "CONECRN",
+   "Dorcas",
+   "Danish Refugee Council",
+   "Himaya",
+   "ICRC",
+   "Intersos",
+   "IOCC",
+   "IRC",
+   "KAFA",
+   "Makhzoumi Foundation",
+   "Mercy Corps",
+   "Mouvement Social",
+   "MSF",
+   "Nabad",
+   "NRC",
+   "RAHMA",
+   "RESTART",
+   "Renee Mouawad Foundation",
+   "RtP",
+   "Sanabel Al Janoub",
+   "SAWA",
+   "SCI",
+   "SIF",
+   "TDH-Italy",
+   "TDH-Lausanne",
+   "WCH",
+   "WVI",
+   "YNCA",
+   "MAP-UK",
+   "Other"
+  ]
+ },
+ "child_nationality_array": {
+  "en": [
+   "",
+   "Lebanese",
+   "Syrian",
+   "Palestinian",
+   "Other Nationality"
+  ],
+  "ar": [
+   "",
+   "لبناني (ة)",
+   "سوري (ة)",
+   "فلسطيني (ة)",
+   "غير ذلك"
+  ]
+ },
+ "childs_gender_array": {
+  "en": [
+   "",
+   "Male",
+   "Female"
+  ],
+  "ar": [
+   "",
+   "ذكر",
+   "أنثى"
+  ]
+ },
+ "donor_name_array": {
+  "en": [
+   "",
+   "UNICEF",
+   "UNHCR",
+   "ERF",
+   "BPRM",
+   "SiDA",
+   "UNRWA",
+   "UNFPA",
+   "DFID",
+   "ECHO",
+   "UNDP",
+   "DFATD - Canada",
+   "EC - DEVCO",
+   "Other"
+  ],
+  "ar": [
+   "",
+   "UNICEF",
+   "UNHCR",
+   "ERF",
+   "BPRM",
+   "SiDA",
+   "UNRWA",
+   "UNFPA",
+   "DFID",
+   "ECHO",
+   "UNDP",
+   "DFATD - Canada",
+   "EC - DEVCO",
+   "Other"
+  ]
+ },
+ "form_array": {
+  "en": [
+   "",
+   "Form 6-11",
+   "Form 12-17"
+  ],
+  "ar": [
+   "",
+   "Form 6-11",
+   "Form 12-17"
+  ]
+ },
+ "gateway_type_array": {
+  "en": [
+   "",
+   "Informal Settlement",
+   "Social Development Center",
+   "School",
+   "Primary Health Center",
+   "Secondary Health Center",
+   "Municipality",
+   "Community center",
+   "Palestinian camp",
+   "Palestinian gathering",
+   "UNHCR registration center",
+   "Border crossing",
+   "Remotely",
+   "Other"
+  ],
+  "ar": [
+   "",
+   "مستوطنة غير رسمية",
+   "مركز التنمية الإجتماعية",
+   "مدرسة",
+   "مركز الرعاية الصحية الأولية",
+   "مركز الرعاية الصحية الثانوية",
+   "بلدية",
+   "مركز إجتماعي",
+   "مخيم للفلسطينيين",
+   "تجمع للفلسطينيين",
+   "مركز تسجيل لمفوضية الأمم المتحدة",
+   "معبر حدود",
+   "عن بعد",
+   "غير ذلك"
+  ]
+ },
+ "may_i_start_now_array": {
+  "en": [
+   "",
+   "Yes, permission is given",
+   "No, permission is not given"
+  ],
+  "ar": [
+   "",
+   "نعم، تم منح الإذن",
+   "لا، لم يتم منح الإذن"
+  ]
+ },
+ "year_array": {
+  "en": [
+   "",
+   "2020",
+   "2021",
+   "2022",
+   "2023",
+   "2024",
+   "2025"
+  ],
+  "ar": [
+   "",
+   "2020",
+   "2021",
+   "2022",
+   "2023",
+   "2024",
+   "2025"
+  ]
+ }
+}

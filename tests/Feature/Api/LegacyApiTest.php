@@ -69,7 +69,9 @@ class LegacyApiTest extends TestCase
             ->assertJsonPath('data.partner_name', 'Akkar')
             ->assertJsonPath('data.last_increment_no', 0)
             ->assertJsonPath('data.is_readonly', '0')
-            ->assertJsonStructure(['data' => ['id', 'firstname', 'lastname', 'email', 'phone', 'zone', 'address', 'fax', 'is_active', 'email_verified_at', 'api_token', 'created_at', 'updated_at'], 'message']);
+            ->assertJsonPath('data.year', (string) now()->year)
+            ->assertJsonPath('data.years', [now()->year])
+            ->assertJsonStructure(['data' => ['id', 'firstname', 'lastname', 'email', 'phone', 'zone', 'address', 'fax', 'is_active', 'email_verified_at', 'api_token', 'created_at', 'updated_at', 'year', 'years'], 'message']);
 
         $this->assertSame(50, strlen($response->json('data.api_token')));
         $this->assertStringStartsWith('Welcome!', $response->json('message'));
@@ -124,6 +126,38 @@ class LegacyApiTest extends TestCase
 
         $this->postJson('/api/view-application', ['token' => $token, 'code' => $code])->assertOk()
             ->assertJsonPath('data.application.code', $code)->assertJsonPath('data.pre_test.area_name', 'Aadouiye');
+    }
+
+    /** sdq-12.apk sends raw spinner values; they must be accepted and normalised. */
+    public function test_values_exactly_as_the_android_app_sends_them_are_accepted(): void
+    {
+        $token = $this->token();
+        $payload = $this->questionnaire([
+            'gender' => 'Female',
+            'may_i_start_now' => 'Yes, permission is given',
+            'category' => 'Child Marriage Activity',
+            'gateway_type' => 'Remotely',
+            'agency_name' => 'TDH-Lausanne',
+            'year' => '2025',
+            'app_version' => '12',
+            'do_the_child_receive_any_other_child_protection_services' => ['Case management', 'No'],
+        ]);
+
+        $this->postJson('/api/submit-pre-test-application', ['token' => $token, 'code' => 'AKK-C1-7'] + $payload)
+            ->assertOk()->assertJsonPath('data.status_name', ApplicationStatus::PostTest->value);
+
+        $application = Application::where('code', 'AKK-C1-7')->firstOrFail();
+        $this->assertSame(2025, $application->year);
+        $this->assertSame('female', $application->preTest->gender);
+        $this->assertSame('yes', $application->preTest->may_i_start_now);
+        $this->assertSame('Child Marriage Activity', $application->preTest->category);
+        $this->assertSame('Case management', $application->preTest->do_the_child_receive_any_other_child_protection_services);
+
+        // Legacy web spellings are mapped onto the same canonical values.
+        $this->postJson('/api/submit-pre-test-application', ['token' => $token, 'code' => 'AKK-C1-8'] + $this->questionnaire([
+            'category' => 'Child Mariage Activity', 'gateway_type' => 'Border crossing, Other', 'gender' => 'MALE',
+        ]))->assertOk();
+        $this->assertSame('Child Marriage Activity', Application::where('code', 'AKK-C1-8')->firstOrFail()->preTest->category);
     }
 
     public function test_save_pre_test_keeps_draft_and_validation_errors_use_legacy_shape(): void

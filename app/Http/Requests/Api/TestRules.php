@@ -4,6 +4,7 @@ namespace App\Http\Requests\Api;
 
 use App\Http\Requests\PostTestRequest;
 use App\Http\Requests\PreTestRequest;
+use App\Sdq\FormOptions;
 use App\Sdq\SdqItems;
 use Illuminate\Contracts\Validation\Validator as ValidatorContract;
 use Illuminate\Support\Facades\Validator;
@@ -17,6 +18,7 @@ final class TestRules
 {
     public static function normalise(array $data): array
     {
+        $data = FormOptions::normalise($data);
         foreach (SdqItems::all() as $item) {
             if (isset($data[$item]) && is_string($data[$item])) {
                 $data[$item] = strtolower($data[$item]);

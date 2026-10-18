@@ -74,7 +74,7 @@ docker build -t measuring-wellbeing .
 | Azure infrastructure (Bicep) | Done | Compiles; first deployment pending an Azure subscription |
 | CI/CD (GitHub Actions) | Done | Needs OIDC app registration and repository secrets/variables |
 | Documentation | Done | Architecture, runbook, operations, API |
-| New mobile app | Pending | Offline-first client of `/api/v1`; old APK keeps working meanwhile |
+| New mobile app | Pending | Offline-first client of `/api/v1`; old APK (sdq-12) analysed in `docs/MOBILE_APP_ANALYSIS.md` and keeps working through the legacy API meanwhile |
 | Azure Blob Storage for logos/exports | Pending | Storage account provisioned; Laravel adapter and `FILESYSTEM_DISK` switch to do |
 | Microsoft Entra ID sign-in for admins | Pending | Decision needed |
 | Scoring policy decision | Pending | `documented` by default; see `docs/ARCHITECTURE.md` section 7 |

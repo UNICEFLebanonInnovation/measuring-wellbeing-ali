@@ -74,9 +74,22 @@ class LegacyAuthController extends ApiController
             'partner_prefix' => $partner->prefix,
             'partner_name' => $partner->name,
             'last_increment_no' => Application::withTrashed()->where('collector_id', $user->id)->count(),
+            // sdq-12.apk requires these two keys (reporting-year spinner); login fails without them.
+            'year' => (string) now()->year,
+            'years' => $this->reportingYears($user->id),
         ];
 
         return $this->success($data, 'Welcome! '.ucfirst((string) $user->firstname));
+    }
+
+    /** Years offered by the app's reporting-year spinner: the collector's existing years plus the current one. */
+    private function reportingYears(int $collectorUserId): array
+    {
+        $years = Application::withTrashed()->where('collector_id', $collectorUserId)
+            ->whereNotNull('year')->distinct()->orderBy('year')->pluck('year')->map(fn ($y) => (int) $y)->all();
+        $years[] = (int) now()->year;
+
+        return array_values(array_unique($years));
     }
 
     public function logout(Request $request): JsonResponse

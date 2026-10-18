@@ -208,6 +208,12 @@ class LegacyApplicationController extends ApiController
                 return $application;
             });
 
+            // sdq-12.apk sends the reporting year chosen in the form.
+            $year = (int) $request->input('year');
+            if ($year >= 2019 && $year <= 2100 && $application->year !== $year) {
+                $application->forceFill(['year' => $year])->save();
+            }
+
             $application = $isPost
                 ? $this->service->savePostTest($application, $validated, $submit, $user)
                 : $this->service->savePreTest($application, $validated, $submit, $user);
