@@ -135,5 +135,8 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
+          # Stable file name so the link to the latest release never changes:
+          # https://github.com/<owner>/<repo>/releases/latest/download/measuring-wellbeing.apk
+          cp build/app/outputs/flutter-apk/measuring-wellbeing-*.apk build/app/outputs/flutter-apk/measuring-wellbeing.apk
           gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1 || gh release create "$GITHUB_REF_NAME" --generate-notes --title "Mobile app $GITHUB_REF_NAME"
-          gh release upload "$GITHUB_REF_NAME" build/app/outputs/flutter-apk/measuring-wellbeing-*.apk --clobber
+          gh release upload "$GITHUB_REF_NAME" build/app/outputs/flutter-apk/measuring-wellbeing.apk build/app/outputs/flutter-apk/measuring-wellbeing-*.apk --clobber
