@@ -6,6 +6,10 @@ name: Deploy
 # Required repository secrets:  AZURE_CLIENT_ID, AZURE_TENANT_ID, AZURE_SUBSCRIPTION_ID
 # Required repository variables: AZURE_RG_STAGING, AZURE_RG_PROD, ACR_NAME_STAGING,
 #   ACR_NAME_PROD, APP_PREFIX_STAGING (mwb-staging), APP_PREFIX_PROD (mwb-prod)
+#
+# Both jobs run inside the GitHub environment ("staging" or "production"), so
+# the OIDC subject is repo:<owner>/<repo>:environment:<name> whatever the
+# branch. The infrastructure (infra.yml) must exist before the first run.
 
 on:
   push:
@@ -31,6 +35,8 @@ jobs:
   build:
     name: Build and push image
     runs-on: ubuntu-latest
+    environment:
+      name: ${{ (inputs.environment || 'staging') == 'prod' && 'production' || 'staging' }}
     outputs:
       image: ${{ steps.meta.outputs.image }}
       env_name: ${{ steps.meta.outputs.env_name }}

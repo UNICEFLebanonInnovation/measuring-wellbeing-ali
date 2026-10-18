@@ -57,7 +57,8 @@ docker build -t measuring-wellbeing .
 
 - Image: multi-stage `Dockerfile` (Composer, Vite, FrankenPHP). One image, `CONTAINER_ROLE` = `web` | `worker` | `scheduler` | `migrate`.
 - Azure: `infra/main.bicep` provisions Container Apps, MySQL Flexible Server, Key Vault, Storage, ACR and monitoring. Commands and GitHub OIDC setup in [`infra/README.md`](infra/README.md).
-- Pipelines: `ci.yml` on every push/PR; `deploy.yml` builds and pushes the image, runs the migrate job, updates the apps (`main` to staging automatically, production behind an approval); `infra.yml` deploys Bicep with a what-if step.
+- Pipelines: `ci.yml` on every push/PR (tests, front-end build, Docker image build); `deploy.yml` builds and pushes the image, runs the migrate job, updates the apps (`main` to staging automatically, production behind an approval); `infra.yml` deploys Bicep with a what-if step; `mobile.yml` builds the Android APK.
+- From a workstation: `scripts/build-and-push.sh staging` builds the image and pushes it to the registry; add `--deploy` to run the migrations and roll it out. First-time setup, step by step, in [`infra/README.md`](infra/README.md).
 - Cutover procedure: [`docs/MIGRATION_RUNBOOK.md`](docs/MIGRATION_RUNBOOK.md). Day-2: [`docs/OPERATIONS.md`](docs/OPERATIONS.md).
 
 ## Status

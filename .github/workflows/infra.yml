@@ -18,6 +18,9 @@ on:
         description: Apply the deployment (otherwise what-if only)
         type: boolean
         default: false
+      image:
+        description: Image for the container apps (default = the image currently running; empty on a first deployment = platform without apps)
+        required: false
 
 permissions:
   id-token: write
@@ -63,6 +66,23 @@ jobs:
             echo "APP_KEY=base64:$(openssl rand -base64 32)" >> "$GITHUB_ENV"
           fi
           echo "CICD_PRINCIPAL_ID=$(az ad sp show --id "${{ secrets.AZURE_CLIENT_ID }}" --query id -o tsv)" >> "$GITHUB_ENV"
+
+      - name: Resolve the image to run
+        env:
+          RG: ${{ steps.rg.outputs.rg }}
+          WEB: mwb-${{ inputs.environment }}-web
+          INPUT_IMAGE: ${{ inputs.image }}
+        run: |
+          IMAGE="$INPUT_IMAGE"
+          if [ -z "$IMAGE" ]; then
+            IMAGE=$(az containerapp show -g "$RG" -n "$WEB" --query 'properties.template.containers[0].image' -o tsv 2>/dev/null || true)
+          fi
+          if [ -z "$IMAGE" ]; then
+            echo "::notice::No image given and $WEB does not exist yet: deploying the platform without the container apps. Push an image with scripts/build-and-push.sh, then run this workflow again with the image."
+          else
+            echo "Container apps will run $IMAGE"
+          fi
+          echo "IMAGE=$IMAGE" >> "$GITHUB_ENV"
 
       - name: What-if
         run: |

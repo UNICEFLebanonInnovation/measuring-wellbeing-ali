@@ -74,7 +74,7 @@ Administrators > the user > "Resend set-up email", or toggle Active. From the sh
 
 ## Deployments
 
-- `main` auto-deploys to staging; production is the Deploy workflow with `environment=prod` and reviewer approval.
+- `main` auto-deploys to staging; production is the Deploy workflow with `environment=prod` and reviewer approval. From a workstation with Docker and the Azure CLI: `scripts/build-and-push.sh <env> --deploy`.
 - Each deploy runs the migrate job first; if it fails the apps are not updated.
 - Roll back by re-running Deploy on the previous commit, or instantly by activating the previous revision:
 

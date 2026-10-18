@@ -16,8 +16,11 @@ param tags object = {
   owner: 'unicef-lebanon-innovation'
 }
 
-@description('Image to run. On first deployment use the public placeholder; the deploy workflow updates the apps with the real image.')
-param image string = 'mcr.microsoft.com/k8se/quickstart:latest'
+@description('Full image reference to run, e.g. mwbstagingacr.azurecr.io/measuring-wellbeing:abc123. Leave empty on the very first deployment: the registry and the rest of the platform are created without the container apps, then push an image (scripts/build-and-push.sh) and deploy again with it.')
+param image string = ''
+
+@description('Deploy the container apps and the migrate job. Defaults to true as soon as an image is given.')
+param deployApps bool = !empty(image)
 
 @description('Public URL of the application (APP_URL).')
 param appUrl string
@@ -137,7 +140,7 @@ module mysql 'modules/mysql.bicep' = {
   }
 }
 
-module apps 'modules/container-apps.bicep' = {
+module apps 'modules/container-apps.bicep' = if (deployApps) {
   name: 'container-apps'
   params: {
     location: location
@@ -181,10 +184,11 @@ output registryName string = registry.outputs.name
 output keyVaultName string = keyVault.outputs.name
 output storageAccountName string = storage.outputs.name
 output mysqlFqdn string = mysql.outputs.fqdn
-output webAppName string = apps.outputs.webName
-output workerAppName string = apps.outputs.workerName
-output schedulerAppName string = apps.outputs.schedulerName
-output migrateJobName string = apps.outputs.migrateJobName
-output webFqdn string = apps.outputs.webFqdn
-output environmentStaticIp string = apps.outputs.environmentStaticIp
+output appsDeployed bool = deployApps
+output webAppName string = deployApps ? apps!.outputs.webName : ''
+output workerAppName string = deployApps ? apps!.outputs.workerName : ''
+output schedulerAppName string = deployApps ? apps!.outputs.schedulerName : ''
+output migrateJobName string = deployApps ? apps!.outputs.migrateJobName : ''
+output webFqdn string = deployApps ? apps!.outputs.webFqdn : ''
+output environmentStaticIp string = deployApps ? apps!.outputs.environmentStaticIp : ''
 output identityPrincipalId string = identity.outputs.principalId

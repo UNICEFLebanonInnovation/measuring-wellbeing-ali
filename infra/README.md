@@ -14,7 +14,13 @@ Everything the platform needs in Azure is declared in Bicep under this folder an
 | Container Apps | `mwb-<env>-web`, `-worker`, `-scheduler` | Same image, `CONTAINER_ROLE` differs |
 | Container Apps job | `mwb-<env>-migrate` | Runs migrations and seeders before each deploy |
 
-## One-time setup
+## First deployment, step by step
+
+The container apps need an image that exists in the registry, and the registry is created by the same Bicep deployment. The first deployment therefore runs in two passes: platform without the apps, push the image, platform with the apps. Later deployments are single-pass.
+
+Prerequisites on your machine: Azure CLI (`az`), Docker, Git. Or do everything from GitHub Actions (see "CI/CD identity" below) once the OIDC identity exists.
+
+### 1. Sign in and create the resource group
 
 ```bash
 az login
@@ -29,7 +35,7 @@ LOCATION=westeurope              # closest region with MySQL Flexible + Containe
 az group create -n $RG -l $LOCATION
 ```
 
-Generate the secrets the deployment needs (never commit them):
+### 2. Generate the secrets (never commit them)
 
 ```bash
 export MYSQL_ADMIN_PASSWORD="$(openssl rand -base64 24)"
@@ -38,22 +44,69 @@ export APP_KEY="base64:$(openssl rand -base64 32)"
 export CICD_PRINCIPAL_ID=""
 ```
 
-Deploy (what-if first):
+Keep the two values somewhere safe for now; after this deployment they live in Key Vault (`db-password`, `app-key`) and the deployment reads them from there on later runs.
+
+### 3. Deploy the platform without the container apps
+
+With `IMAGE` unset the template creates monitoring, identity, registry, Key Vault, storage and MySQL only.
 
 ```bash
+unset IMAGE
 az deployment group what-if -g $RG -f infra/main.bicep -p infra/params/$ENV.bicepparam
-az deployment group create  -g $RG -f infra/main.bicep -p infra/params/$ENV.bicepparam \
-  --name "infra-$(date +%Y%m%d%H%M)"
+az deployment group create  -g $RG -f infra/main.bicep -p infra/params/$ENV.bicepparam --name "infra-$(date +%Y%m%d%H%M)"
 ```
 
-The first deployment runs the public quick-start image because the registry is empty. Build and push the real image (or run the `deploy.yml` workflow) and the apps are updated to it.
+### 4. Build the image and push it to the registry
 
-Read the outputs:
+```bash
+scripts/build-and-push.sh $ENV
+```
+
+The script builds `linux/amd64`, signs in to `mwb<env>acr` with your Azure identity and pushes `measuring-wellbeing:<git sha>` and `measuring-wellbeing:<env>-latest`. It prints the image reference to use next.
+
+### 5. Deploy again with the image
+
+```bash
+export IMAGE=mwb${ENV}acr.azurecr.io/measuring-wellbeing:<tag printed by the script>
+az deployment group create -g $RG -f infra/main.bicep -p infra/params/$ENV.bicepparam --name "infra-$(date +%Y%m%d%H%M)"
+```
+
+This creates the Container Apps environment, the `web`, `worker` and `scheduler` apps and the `migrate` job, all running the image. The web app only becomes healthy after the database has its schema, so:
+
+### 6. Run the migrations and create the first administrator
+
+```bash
+az containerapp job start -g $RG -n mwb-$ENV-migrate
+az containerapp job execution list -g $RG -n mwb-$ENV-migrate -o table   # wait for Succeeded
+
+az containerapp exec -g $RG -n mwb-$ENV-web --command bash
+SDQ_ADMIN_EMAIL=someone@unicef.org SDQ_ADMIN_PASSWORD='<temporary strong password>' \
+  php artisan db:seed --class=AdminUserSeeder --force
+exit
+```
+
+Read the public address and open it:
+
+```bash
+az containerapp show -g $RG -n mwb-$ENV-web --query properties.configuration.ingress.fqdn -o tsv
+```
+
+To restore the production data instead of starting empty, follow `docs/MIGRATION_RUNBOOK.md` between steps 5 and 6.
+
+### Every later release
+
+Either push to `main` (staging deploys automatically) / run the **Deploy** workflow (production, behind approval), or from your machine:
+
+```bash
+scripts/build-and-push.sh $ENV --deploy      # build, push, migrate job, update the three apps, health check
+```
+
+Re-running the Bicep deployment later keeps the running image when `IMAGE` is set to it (the **Infrastructure** workflow reads it from the web app automatically). With `IMAGE` empty the template would try to remove the apps, so always export it for an existing environment.
+
+Read the outputs of any deployment:
 
 ```bash
 az deployment group show -g $RG -n <deployment name> --query properties.outputs -o json
-# web FQDN only
-az containerapp show -g $RG -n mwb-$ENV-web --query properties.configuration.ingress.fqdn -o tsv
 ```
 
 ### Secrets after the first deployment
@@ -98,17 +151,16 @@ APP_ID=$(az ad app list --display-name $APP_NAME --query '[0].appId' -o tsv)
 az ad sp create --id $APP_ID
 SP_OBJECT_ID=$(az ad sp show --id $APP_ID --query id -o tsv)
 
-# Federated credential for the repository (main branch, and the "production" environment)
-az ad app federated-credential create --id $APP_ID --parameters '{
-  "name": "github-main",
-  "issuer": "https://token.actions.githubusercontent.com",
-  "subject": "repo:UNICEFLebanonInnovation/measuring-wellbeing-ali:ref:refs/heads/main",
-  "audiences": ["api://AzureADTokenExchange"]}'
-az ad app federated-credential create --id $APP_ID --parameters '{
-  "name": "github-production-env",
-  "issuer": "https://token.actions.githubusercontent.com",
-  "subject": "repo:UNICEFLebanonInnovation/measuring-wellbeing-ali:environment:production",
-  "audiences": ["api://AzureADTokenExchange"]}'
+# Federated credentials. The Deploy and Infrastructure workflows run every job
+# inside a GitHub environment, so one credential per environment is enough
+# whatever the branch the workflow is started from.
+for GH_ENV in staging production; do
+az ad app federated-credential create --id $APP_ID --parameters "{
+  \"name\": \"github-$GH_ENV-env\",
+  \"issuer\": \"https://token.actions.githubusercontent.com\",
+  \"subject\": \"repo:UNICEFLebanonInnovation/measuring-wellbeing-ali:environment:$GH_ENV\",
+  \"audiences\": [\"api://AzureADTokenExchange\"]}"
+done
 
 # Contributor on both resource groups (deploys apps and runs jobs)
 for ENV in staging prod; do
@@ -122,7 +174,14 @@ GitHub repository settings:
 
 - Secrets: `AZURE_CLIENT_ID` (= `$APP_ID`), `AZURE_TENANT_ID`, `AZURE_SUBSCRIPTION_ID`.
 - Variables: `AZURE_RG_STAGING=rg-mwb-staging`, `AZURE_RG_PROD=rg-mwb-prod`, `ACR_NAME_STAGING=mwbstagingacr`, `ACR_NAME_PROD=mwbprodacr`, `APP_PREFIX_STAGING=mwb-staging`, `APP_PREFIX_PROD=mwb-prod`.
-- Environment `production` with required reviewers (the deploy workflow waits for approval before touching prod).
+- Environments `staging` and `production` (Settings > Environments). Give `production` required reviewers; the deploy workflow then waits for approval before building and before deploying to prod.
+
+With the identity in place, the first deployment can be done entirely from GitHub, without Docker on a workstation:
+
+1. **Infrastructure** workflow, environment `staging`, apply ticked, image empty: creates the platform without the apps.
+2. **Deploy** workflow: its build job pushes the image to the registry; its deploy job then fails at the migrate step because the apps do not exist yet. That is expected on this one run; note the image tag from the build job log (`mwbstagingacr.azurecr.io/measuring-wellbeing:<sha>`).
+3. **Infrastructure** workflow again with that tag in the `image` input: creates the apps and the migrate job.
+4. **Deploy** workflow once more (or any later push to `main`): migrations run, apps updated, health check passes. Then create the first administrator as in step 6 above.
 
 ## Running the migrate job by hand
 

@@ -10,6 +10,9 @@ param customDomain = ''
 param mysqlAdministratorPassword = readEnvironmentVariable('MYSQL_ADMIN_PASSWORD', '')
 param appKey = readEnvironmentVariable('APP_KEY', '')
 param cicdPrincipalId = readEnvironmentVariable('CICD_PRINCIPAL_ID', '')
+// Image to run. Empty on the first deployment (platform without the apps);
+// afterwards the current image, e.g. export IMAGE=mwbstagingacr.azurecr.io/measuring-wellbeing:<tag>
+param image = readEnvironmentVariable('IMAGE', '')
 
 param mysqlSkuName = 'Standard_B1ms'
 param mysqlSkuTier = 'Burstable'
