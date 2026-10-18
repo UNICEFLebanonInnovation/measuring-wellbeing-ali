@@ -57,9 +57,10 @@ android {
             // Signed with the release keystore when one is configured, otherwise with
             // the debug key so `flutter build apk` still works on a developer machine.
             signingConfig = if (hasReleaseKey) signingConfigs.getByName("release") else signingConfigs.getByName("debug")
-            isMinifyEnabled = true
-            isShrinkResources = true
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            // Code shrinking is off: the APK is side-loaded, size is not a concern,
+            // and R8 must not be able to strip plugin code at runtime.
+            isMinifyEnabled = false
+            isShrinkResources = false
         }
     }
 }

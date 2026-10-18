@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:math';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import '../models/user_profile.dart';
@@ -12,19 +13,38 @@ abstract class SecureKeyValue {
   Future<void> delete(String key);
 }
 
+/// Keystore-backed storage. If the encrypted-shared-preferences backend is
+/// unusable on a device (corrupted keystore entry, vendor bugs) the plugin's
+/// default backend is used instead, so the app still starts.
 class FlutterSecureKeyValue implements SecureKeyValue {
-  FlutterSecureKeyValue() : _storage = const FlutterSecureStorage(aOptions: AndroidOptions(encryptedSharedPreferences: true));
+  FlutterSecureKeyValue()
+    : _primary = const FlutterSecureStorage(aOptions: AndroidOptions(encryptedSharedPreferences: true)),
+      _fallback = const FlutterSecureStorage();
 
-  final FlutterSecureStorage _storage;
+  final FlutterSecureStorage _primary;
+  final FlutterSecureStorage _fallback;
+  bool _useFallback = false;
+
+  Future<T> _run<T>(Future<T> Function(FlutterSecureStorage s) action) async {
+    if (!_useFallback) {
+      try {
+        return await action(_primary).timeout(const Duration(seconds: 10));
+      } catch (e) {
+        debugPrint('Secure storage (encrypted prefs) failed, using fallback: $e');
+        _useFallback = true;
+      }
+    }
+    return action(_fallback).timeout(const Duration(seconds: 10));
+  }
 
   @override
-  Future<String?> read(String key) => _storage.read(key: key);
+  Future<String?> read(String key) => _run((s) => s.read(key: key));
 
   @override
-  Future<void> write(String key, String? value) => value == null ? _storage.delete(key: key) : _storage.write(key: key, value: value);
+  Future<void> write(String key, String? value) => _run((s) => value == null ? s.delete(key: key) : s.write(key: key, value: value));
 
   @override
-  Future<void> delete(String key) => _storage.delete(key: key);
+  Future<void> delete(String key) => _run((s) => s.delete(key: key));
 }
 
 class InMemoryKeyValue implements SecureKeyValue {

@@ -28,8 +28,13 @@ class AppServices {
   final String version;
 
   static Future<AppServices> bootstrap() async {
-    final info = await PackageInfo.fromPlatform();
-    final version = '${info.version}+${info.buildNumber}';
+    String version;
+    try {
+      final info = await PackageInfo.fromPlatform().timeout(const Duration(seconds: 5));
+      version = '${info.version}+${info.buildNumber}';
+    } catch (_) {
+      version = 'unknown';
+    }
     final session = SessionStore(FlutterSecureKeyValue());
     final dbKey = await session.databaseKey();
     final db = AppDatabase(() => openEncryptedDatabase(dbKey));
