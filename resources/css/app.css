@@ -1,9 +1,78 @@
 @import 'tailwindcss';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
+@source '../../resources/js/**/*.vue';
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-sans: 'Inter', 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, 'Noto Sans Arabic', sans-serif;
+
+    /* Inter-Agency Coordination Lebanon palette (Pantone 300 blue). */
+    --color-brand-50: #e8f1fa;
+    --color-brand-100: #c9dff3;
+    --color-brand-200: #9cc3e8;
+    --color-brand-300: #6ea6dc;
+    --color-brand-400: #428ad0;
+    --color-brand-500: #1b75bc;
+    --color-brand-600: #155f9b;
+    --color-brand-700: #104a79;
+    --color-brand-800: #0b3557;
+    --color-brand-900: #062035;
+}
+
+html {
+    @apply bg-slate-50 text-slate-800 antialiased;
+}
+
+[dir='rtl'] {
+    font-family: 'Noto Sans Arabic', 'Segoe UI', Tahoma, Arial, sans-serif;
+}
+
+@layer components {
+    .btn {
+        @apply inline-flex items-center justify-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 disabled:cursor-not-allowed disabled:opacity-50;
+    }
+    .btn-primary {
+        @apply inline-flex items-center justify-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 disabled:cursor-not-allowed disabled:opacity-50 bg-brand-500 text-white hover:bg-brand-600;
+    }
+    .btn-secondary {
+        @apply inline-flex items-center justify-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 disabled:cursor-not-allowed disabled:opacity-50 border border-slate-300 bg-white text-slate-700 hover:bg-slate-50;
+    }
+    .btn-danger {
+        @apply inline-flex items-center justify-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 disabled:cursor-not-allowed disabled:opacity-50 bg-red-600 text-white hover:bg-red-700;
+    }
+    .btn-sm {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.75rem;
+        line-height: 1rem;
+    }
+    .input {
+        @apply block w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm shadow-sm placeholder:text-slate-400 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 disabled:bg-slate-100;
+    }
+    .label {
+        @apply mb-1 block text-sm font-medium text-slate-700;
+    }
+    .card {
+        @apply rounded-lg border border-slate-200 bg-white shadow-sm;
+    }
+    .card-header {
+        @apply flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 px-4 py-3;
+    }
+    .card-body {
+        @apply p-4;
+    }
+    .table {
+        @apply min-w-full divide-y divide-slate-200 text-sm;
+    }
+    .table th {
+        @apply bg-slate-50 px-3 py-2 text-start text-xs font-semibold tracking-wide text-slate-600 uppercase;
+    }
+    .table td {
+        @apply px-3 py-2 align-top;
+    }
+    .badge {
+        @apply inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium;
+    }
+    .error {
+        @apply mt-1 text-xs text-red-600;
+    }
 }

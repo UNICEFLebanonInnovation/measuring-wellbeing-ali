@@ -1,0 +1,85 @@
+# Local development stack for the modernised application.
+#
+#   cp .env.example .env
+#   docker compose up -d
+#   docker compose exec app php artisan key:generate
+#   docker compose exec app php artisan migrate --seed
+#   docker compose exec app npm run dev      # or run vite on the host
+#   open http://localhost:8000
+#
+services:
+  app:
+    build:
+      context: .
+      target: runtime
+    # In development the host source tree is mounted and served without opcache caching.
+    environment:
+      APP_ENV: local
+      APP_DEBUG: "true"
+      CONTAINER_ROLE: web
+      DB_HOST: db
+      DB_PORT: "3306"
+      DB_DATABASE: sdq
+      DB_USERNAME: sdq
+      DB_PASSWORD: sdq
+      MAIL_HOST: mailpit
+      MAIL_PORT: "1025"
+      RUN_MIGRATIONS_ON_START: "true"
+      PHP_INI_SCAN_DIR: "/usr/local/etc/php/conf.d:/app/docker/php/dev"
+    env_file: .env
+    ports:
+      - "8000:8080"
+    volumes:
+      - .:/app
+      - /app/vendor
+      - /app/node_modules
+    depends_on:
+      db:
+        condition: service_healthy
+
+  worker:
+    build:
+      context: .
+      target: runtime
+    environment:
+      CONTAINER_ROLE: worker
+      DB_HOST: db
+      DB_DATABASE: sdq
+      DB_USERNAME: sdq
+      DB_PASSWORD: sdq
+      MAIL_HOST: mailpit
+      MAIL_PORT: "1025"
+    env_file: .env
+    volumes:
+      - .:/app
+      - /app/vendor
+      - /app/node_modules
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: mysql:8.4
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: sdq
+      MYSQL_USER: sdq
+      MYSQL_PASSWORD: sdq
+    ports:
+      - "3306:3306"
+    volumes:
+      - db-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-proot"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  mailpit:
+    image: axllent/mailpit:latest
+    ports:
+      - "8025:8025"
+
+volumes:
+  db-data:

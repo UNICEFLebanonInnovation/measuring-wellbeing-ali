@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Sdq\ApplicationStatus;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Cache;
 
 class Status extends Model
@@ -11,6 +12,11 @@ class Status extends Model
     protected $table = 'status';
 
     protected $fillable = ['name'];
+
+    public function applications(): HasMany
+    {
+        return $this->hasMany(Application::class, 'status');
+    }
 
     private static ?array $byName = null;
 

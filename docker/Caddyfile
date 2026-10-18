@@ -1,0 +1,28 @@
+{
+	frankenphp
+	order php_server before file_server
+	auto_https off
+}
+
+{$SERVER_NAME}
+
+log {
+	output stdout
+	format json
+}
+
+root * /app/public
+encode zstd gzip
+
+# Static assets built by Vite are immutable (hashed file names).
+@assets path /build/*
+header @assets Cache-Control "public, max-age=31536000, immutable"
+
+header {
+	X-Content-Type-Options nosniff
+	X-Frame-Options SAMEORIGIN
+	Referrer-Policy strict-origin-when-cross-origin
+	-Server
+}
+
+php_server
