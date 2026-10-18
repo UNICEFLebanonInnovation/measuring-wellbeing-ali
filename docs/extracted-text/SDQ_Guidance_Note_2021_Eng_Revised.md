@@ -588,7 +588,7 @@ Repeat the same scenario as the previous pre-test](mailto:ybeydoun@unicef.org)
 <td><a href="mailto:ybeydoun@unicef.org">[image omitted - see original document]</a></td>
 <td><p>https://measuringwellbeing.org/apk/sdq-10.apk<a href="mailto:ybeydoun@unicef.org">Download and install on Android phones from this link<br />
 </a></p>
-<p>Click on the application icon <img src="/media/image1a.png" style="width:0.33333in;height:0.33333in" /></p>
+<p>Click on the application icon [app icon]</p>
 <p>Use the Collector credentials (username and password) to login</p>
 <p>On success you will be redirected to the collector dashboard where you can see all the application submitted.</p>
 <h2 id="section-2"></h2></td>
