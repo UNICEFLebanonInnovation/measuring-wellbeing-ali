@@ -27,8 +27,9 @@ class PartnerController extends Controller
                 ->orWhere('users.email', 'like', "%{$search}%")
                 ->orWhere('partners.prefix', 'like', "%{$search}%")))
             ->orderBy('partners.name')
+            ->select(['partners.*', 'users.email', 'users.firstname', 'users.lastname', 'users.phone', 'users.is_active', 'users.is_readonly'])
             ->withCount(['collectors', 'applications'])
-            ->paginate(25, ['partners.*', 'users.email', 'users.firstname', 'users.lastname', 'users.phone', 'users.is_active', 'users.is_readonly'])
+            ->paginate(25)
             ->withQueryString()
             ->through(fn ($p) => [
                 'id' => $p->id,

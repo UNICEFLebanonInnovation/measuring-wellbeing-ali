@@ -1,58 +1,91 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Measuring Well-Being (SDQ) platform
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Web platform and API used by UNICEF Lebanon and child-protection partners to run the Strengths and Difficulties Questionnaire (SDQ) as a pre-test and post-test around focused psychosocial support, and to report the share of children whose well-being improved.
 
-## About Laravel
+This repository holds the **modernised application** (Laravel 13, PHP 8.3, Inertia + Vue 3, Docker, Azure) and, under `legacy/`, the original Laravel 5.8 application kept as a reference environment for the migration.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Repository layout
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+| Path | What |
+|---|---|
+| `/` (root) | The new application: Laravel 13 app, `Dockerfile`, `docker-compose.yml`, tests |
+| `app/Sdq/` | Domain: scoring, workflow (`ApplicationService`), code generation, statuses, form options |
+| `app/Http/Controllers/Api/` | API v1 (Sanctum) and the legacy-compatible API for the existing Android app |
+| `resources/js/` | Vue 3 pages and layouts (English/Arabic, RTL) |
+| `database/migrations/0000_*` | Baseline (legacy-compatible) and modernise migrations, safe on a restored production dump |
+| `legacy/` | Original Laravel 5.8 app + Docker reference environment (`legacy/README.md`) |
+| `infra/` | Azure Bicep templates and deployment guide |
+| `.github/workflows/` | CI (tests, build, image), Deploy (ACR + Container Apps), Infrastructure (Bicep) |
+| `docs/` | Review report, architecture, migration runbook, operations, retained project documents |
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Quick start (local)
 
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
-
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+With Docker:
 
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+cp .env.example .env
+docker compose up -d --build
+docker compose exec app php artisan key:generate
+docker compose exec app php artisan migrate --seed       # roles, statuses, Lebanon locations
+# create the first admin
+docker compose exec -e SDQ_ADMIN_EMAIL=admin@example.org -e SDQ_ADMIN_PASSWORD='ChangeMe123' app \
+  php artisan db:seed --class=AdminUserSeeder
+npm install && npm run dev                                 # Vite on the host
+open http://localhost:8000                                 # Mailpit: http://localhost:8025
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+Without Docker (PHP 8.3, Composer, Node 22; SQLite):
 
-## Contributing
+```bash
+composer install && npm install
+cp .env.example .env && php artisan key:generate
+sed -i 's/^DB_CONNECTION=.*/DB_CONNECTION=sqlite/' .env && touch database/database.sqlite
+php artisan migrate --seed
+composer run dev            # serves app + queue + vite
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Tests and checks
 
-## Code of Conduct
+```bash
+php artisan test            # unit + feature (SQLite in memory)
+vendor/bin/pint --test      # code style
+npm run build               # front-end build
+docker build -t measuring-wellbeing .
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Deployment
 
-## Security Vulnerabilities
+- Image: multi-stage `Dockerfile` (Composer, Vite, FrankenPHP). One image, `CONTAINER_ROLE` = `web` | `worker` | `scheduler` | `migrate`.
+- Azure: `infra/main.bicep` provisions Container Apps, MySQL Flexible Server, Key Vault, Storage, ACR and monitoring. Commands and GitHub OIDC setup in [`infra/README.md`](infra/README.md).
+- Pipelines: `ci.yml` on every push/PR; `deploy.yml` builds and pushes the image, runs the migrate job, updates the apps (`main` to staging automatically, production behind an approval); `infra.yml` deploys Bicep with a what-if step.
+- Cutover procedure: [`docs/MIGRATION_RUNBOOK.md`](docs/MIGRATION_RUNBOOK.md). Day-2: [`docs/OPERATIONS.md`](docs/OPERATIONS.md).
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Status
 
-## License
+| Area | State | Notes |
+|---|---|---|
+| Domain model, migrations, seeders | Done | Legacy-compatible schema; additive modernise migration; locations with legacy ids |
+| Scoring and workflow service | Done | Documented and legacy scoring policies; NA, dropout, consent, quota; tests |
+| Web UI (Inertia/Vue, EN/AR) | Done | Auth, dashboard, applications, tests forms, partners, collectors, admins, statuses, locations, change-decrease, CSV export |
+| Analytics and reports | Done | Report service and chart pages replacing the legacy ReportController |
+| API v1 (Sanctum, sync) | Done | `/api/v1`, idempotent `client_uuid`, contract in `docs/API.md` |
+| Legacy API for current Android APK | Done | Same paths and payloads as the old app, routed to the shared workflow service |
+| Docker + local compose | Done | FrankenPHP image, MySQL 8.4, Mailpit |
+| Azure infrastructure (Bicep) | Done | Compiles; first deployment pending an Azure subscription |
+| CI/CD (GitHub Actions) | Done | Needs OIDC app registration and repository secrets/variables |
+| Documentation | Done | Architecture, runbook, operations, API |
+| New mobile app | Pending | Offline-first client of `/api/v1`; old APK keeps working meanwhile |
+| Azure Blob Storage for logos/exports | Pending | Storage account provisioned; Laravel adapter and `FILESYSTEM_DISK` switch to do |
+| Microsoft Entra ID sign-in for admins | Pending | Decision needed |
+| Scoring policy decision | Pending | `documented` by default; see `docs/ARCHITECTURE.md` section 7 |
+| Production data export and verification | Pending | Needs the GoDaddy dump; see runbook steps 1 to 4 |
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Documentation
+
+- [System review and migration assessment](docs/SYSTEM_REVIEW_REPORT.md)
+- [Architecture](docs/ARCHITECTURE.md)
+- [Migration runbook](docs/MIGRATION_RUNBOOK.md)
+- [Operations](docs/OPERATIONS.md)
+- [API contract](docs/API.md)
+- [Azure infrastructure](infra/README.md)
+- [Retained project documents](docs/README.md)

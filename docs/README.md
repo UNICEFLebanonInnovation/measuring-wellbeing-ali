@@ -17,3 +17,12 @@ The system review and migration assessment is in [`SYSTEM_REVIEW_REPORT.md`](SYS
 ## Security note
 
 The original technical PDF (page 11) contains a plaintext FTP username and password for the GoDaddy production server. The text extraction redacts the password. The credential should be treated as compromised and rotated, and the FTP account should be retired once the Azure migration completes.
+
+## Migration status
+
+Option A ("evolve") was chosen on 2026-10-18. The modernised application lives at the repository root, the original under `legacy/`. Progress and open decisions are tracked in the root [README.md](../README.md) status table. Supporting documents:
+
+- [ARCHITECTURE.md](ARCHITECTURE.md): target design, scoring policy, code generation, sync, environments.
+- [MIGRATION_RUNBOOK.md](MIGRATION_RUNBOOK.md): export, restore, verification, UAT, cutover, rollback.
+- [OPERATIONS.md](OPERATIONS.md): logs, deployments, scaling, backups, secrets, common failures.
+- [../infra/README.md](../infra/README.md): Azure resources, one-time setup, CI/CD identity, costs.

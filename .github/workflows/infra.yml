@@ -1,0 +1,78 @@
+name: Infrastructure
+
+# Deploys the Bicep templates. Always shows a what-if first; the deploy step
+# runs only when "apply" is ticked. Secrets for the parameter files
+# (MYSQL_ADMIN_PASSWORD, APP_KEY) are read from Key Vault when it already
+# exists, so re-deployments do not rotate them.
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: Target environment
+        type: choice
+        options: [staging, prod]
+        default: staging
+        required: true
+      apply:
+        description: Apply the deployment (otherwise what-if only)
+        type: boolean
+        default: false
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  bicep:
+    name: Bicep ${{ inputs.environment }}
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ inputs.environment == 'prod' && 'production' || 'staging' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Azure login (OIDC)
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Resolve resource group
+        id: rg
+        run: |
+          if [ "${{ inputs.environment }}" = "prod" ]; then RG="${{ vars.AZURE_RG_PROD }}"; else RG="${{ vars.AZURE_RG_STAGING }}"; fi
+          echo "rg=$RG" >> "$GITHUB_OUTPUT"
+          az bicep upgrade --only-show-errors
+
+      - name: Lint
+        run: az bicep build --file infra/main.bicep --stdout >/dev/null
+
+      - name: Load existing secrets from Key Vault (if present)
+        id: secrets
+        env:
+          KV: mwb-${{ inputs.environment }}-kv
+        run: |
+          if az keyvault show -n "$KV" --only-show-errors >/dev/null 2>&1; then
+            echo "MYSQL_ADMIN_PASSWORD=$(az keyvault secret show --vault-name "$KV" -n db-password --query value -o tsv)" >> "$GITHUB_ENV"
+            echo "APP_KEY=$(az keyvault secret show --vault-name "$KV" -n app-key --query value -o tsv)" >> "$GITHUB_ENV"
+          else
+            echo "Key Vault $KV not found: generating initial secrets for a first deployment"
+            echo "MYSQL_ADMIN_PASSWORD=$(openssl rand -base64 24)" >> "$GITHUB_ENV"
+            echo "APP_KEY=base64:$(openssl rand -base64 32)" >> "$GITHUB_ENV"
+          fi
+          echo "CICD_PRINCIPAL_ID=$(az ad sp show --id "${{ secrets.AZURE_CLIENT_ID }}" --query id -o tsv)" >> "$GITHUB_ENV"
+
+      - name: What-if
+        run: |
+          az deployment group what-if -g "${{ steps.rg.outputs.rg }}" \
+            -f infra/main.bicep -p "infra/params/${{ inputs.environment }}.bicepparam"
+
+      - name: Deploy
+        if: ${{ inputs.apply }}
+        run: |
+          az deployment group create -g "${{ steps.rg.outputs.rg }}" \
+            -f infra/main.bicep -p "infra/params/${{ inputs.environment }}.bicepparam" \
+            --name "infra-${GITHUB_SHA::7}-$(date +%Y%m%d%H%M)" \
+            --query properties.outputs -o json
