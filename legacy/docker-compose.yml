@@ -1,0 +1,54 @@
+# Reference environment for the original Laravel 5.8 application.
+#
+#   cd legacy
+#   cp .env.example .env            # then set APP_KEY (see README)
+#   docker compose up -d --build
+#   ./docker/import-dump.sh path/to/production_dump.sql
+#   open http://localhost:8081
+#
+services:
+  legacy-app:
+    build: .
+    ports:
+      - "8081:80"
+    environment:
+      DB_HOST: legacy-db
+      DB_PORT: "3306"
+      DB_DATABASE: sdq
+      DB_USERNAME: sdq
+      DB_PASSWORD: sdq
+      MAIL_HOST: mailpit
+      MAIL_PORT: "1025"
+      MAIL_ENCRYPTION: "null"
+    volumes:
+      - ./.env:/var/www/html/.env:ro
+    depends_on:
+      legacy-db:
+        condition: service_healthy
+
+  legacy-db:
+    # The GoDaddy host ran MySQL 5.7 era MariaDB; 5.7 keeps the dump compatible.
+    image: mysql:5.7
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --sql-mode=""
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: sdq
+      MYSQL_USER: sdq
+      MYSQL_PASSWORD: sdq
+    ports:
+      - "33061:3306"
+    volumes:
+      - legacy-db-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-proot"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  mailpit:
+    image: axllent/mailpit:latest
+    ports:
+      - "8026:8025"
+
+volumes:
+  legacy-db-data:
