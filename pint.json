@@ -1,0 +1,11 @@
+{
+    "preset": "laravel",
+    "exclude": [
+        "legacy",
+        "lang",
+        "storage",
+        "bootstrap/cache",
+        "node_modules",
+        "public/build"
+    ]
+}
