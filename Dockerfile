@@ -22,7 +22,7 @@ RUN --mount=type=cache,target=/root/.npm npm ci --no-audit --no-fund
 COPY vite.config.js ./
 COPY resources ./resources
 COPY public ./public
-COPY vendor/tightenco/ziggy ./vendor/tightenco/ziggy
+COPY --from=vendor /app/vendor/tightenco/ziggy ./vendor/tightenco/ziggy
 RUN npm run build
 
 # ---------- 3. Runtime ----------
@@ -48,7 +48,7 @@ COPY --chown=www-data:www-data . /app
 COPY --from=vendor --chown=www-data:www-data /app/vendor /app/vendor
 COPY --from=assets --chown=www-data:www-data /app/public/build /app/public/build
 
-RUN rm -rf /app/legacy /app/node_modules /app/tests /app/.env \
+RUN rm -rf /app/legacy /app/mobile /app/node_modules /app/tests /app/.env \
     && mkdir -p storage/framework/{cache,sessions,views} storage/logs bootstrap/cache \
     && chown -R www-data:www-data storage bootstrap/cache \
     && php artisan package:discover --ansi

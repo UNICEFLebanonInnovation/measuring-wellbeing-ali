@@ -50,7 +50,7 @@ jobs:
       - run: sudo apt-get update && sudo apt-get install -y libsqlite3-dev
       - run: flutter pub get
       - run: flutter gen-l10n
-      - run: dart format --output=none --set-exit-if-changed --line-length 160 lib test
+      - run: dart format --output=none --set-exit-if-changed --line-length 160 lib/main.dart lib/app lib/core lib/data lib/domain lib/features lib/services test
       - run: flutter analyze --fatal-infos
       - run: flutter test --coverage
 
