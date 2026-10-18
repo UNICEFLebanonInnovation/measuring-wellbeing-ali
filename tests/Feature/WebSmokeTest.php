@@ -7,6 +7,8 @@ use App\Models\Collector;
 use App\Models\Partner;
 use App\Models\User;
 use App\Sdq\ApplicationService;
+use App\Sdq\SdqItems;
+use Database\Seeders\LocationSeeder;
 use Database\Seeders\RoleSeeder;
 use Database\Seeders\StatusSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -20,7 +22,7 @@ class WebSmokeTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->seed([RoleSeeder::class, StatusSeeder::class]);
+        $this->seed([RoleSeeder::class, StatusSeeder::class, LocationSeeder::class]);
     }
 
     public function test_login_page_renders(): void
@@ -73,6 +75,42 @@ class WebSmokeTest extends TestCase
 
         $this->actingAs($partnerA->user)->get("/applications/{$application->id}")->assertForbidden();
         $this->actingAs($partnerB->user)->get("/applications/{$application->id}")->assertOk();
+    }
+
+    public function test_application_list_renders_with_many_applications_and_filters(): void
+    {
+        $partner = Partner::factory()->create(['prefix' => 'ROB']);
+        $collector = Collector::factory()->forPartner($partner)->create(['prefix' => 'MICH'])->user;
+        $service = ApplicationService::make();
+        foreach (range(1, 3) as $i) {
+            $application = $service->create($collector);
+            $service->savePreTest($application, $this->questionnaire(), true, $collector);
+        }
+
+        $admin = User::factory()->admin()->create();
+        $this->actingAs($admin)->get('/applications?governorate=1&sort=code&dir=asc')
+            ->assertOk()
+            ->assertInertia(fn (Assert $page) => $page->component('Applications/Index')
+                ->has('applications.data', 3)
+                ->where('applications.data.0.governorate', 'Akkar'));
+        $this->actingAs($collector)->get('/applications')->assertOk();
+        $this->actingAs($admin)->get('/change-decrease')->assertOk();
+        $this->actingAs($admin)->get('/dashboard')->assertOk();
+    }
+
+    private function questionnaire(): array
+    {
+        $data = [
+            'category' => 'Other', 'form' => 'Form 6-11', 'agency_name' => 'Agency', 'donor_name' => 'UNICEF',
+            'interview_date' => '2026-03-10', 'interviewers_name' => 'Interviewer', 'age' => '8', 'gender' => 'female',
+            'nationality' => 'Syrian', 'gouvarnate' => '1', 'caza' => '3', 'area' => '3', 'gateway_type' => 'School',
+            'may_i_start_now' => 'yes',
+        ];
+        foreach (SdqItems::all() as $item) {
+            $data[$item] = '1';
+        }
+
+        return $data;
     }
 
     public function test_locale_switch_persists_in_session(): void

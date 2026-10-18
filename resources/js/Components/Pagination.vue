@@ -4,6 +4,7 @@ import { useTranslation } from '../i18n';
 
 defineProps({ paginator: { type: Object, required: true } });
 const { t } = useTranslation();
+const label = (l) => l.replace(/&laquo;|«/g, '').replace(/&raquo;|»/g, '').replace(/Previous/i, '‹').replace(/Next/i, '›').trim();
 </script>
 
 <template>
@@ -17,9 +18,9 @@ const { t } = useTranslation();
                     preserve-scroll
                     class="rounded-md border px-2 py-1"
                     :class="link.active ? 'border-brand-500 bg-brand-500 text-white' : 'border-slate-300 bg-white hover:bg-slate-50'"
-                    v-html="link.label.replace('&laquo; Previous', '‹').replace('Next &raquo;', '›')"
+                    v-html="label(link.label)"
                 />
-                <span v-else class="rounded-md border border-slate-200 px-2 py-1 text-slate-400" v-html="link.label.replace('&laquo; Previous', '‹').replace('Next &raquo;', '›')" />
+                <span v-else class="rounded-md border border-slate-200 px-2 py-1 text-slate-400" v-html="label(link.label)" />
             </template>
         </div>
     </div>

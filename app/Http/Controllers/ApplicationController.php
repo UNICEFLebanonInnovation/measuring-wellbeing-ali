@@ -40,7 +40,7 @@ class ApplicationController extends Controller
         $applications = Application::query()
             ->visibleTo($user)
             ->forYear($request->session()->get('year'))
-            ->with(['statusRow', 'partner:id,user_id,name', 'collector:id,firstname,lastname', 'preTest:id,application_id,score,gouvarnate,form', 'postTest:id,application_id,score'])
+            ->with(['statusRow', 'partner:id,user_id,name', 'collector:id,firstname,lastname', 'preTest:id,application_id,score,gouvarnate,form', 'preTest.governorate:id,name,arabic', 'postTest:id,application_id,score'])
             ->when($filters['code'] ?? null, fn ($q, $v) => $q->where('application.code', 'like', "%{$v}%"))
             ->when($filters['status'] ?? null, fn ($q, $v) => $q->where('application.status', $v))
             ->when($filters['partner'] ?? null, fn ($q, $v) => $q->where('application.partner_id', $v))

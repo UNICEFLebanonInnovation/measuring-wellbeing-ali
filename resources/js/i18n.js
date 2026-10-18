@@ -23,9 +23,11 @@ export function useTranslation() {
         if (typeof text === 'string' && text.includes('|')) {
             text = text.split('|')[0];
         }
-        Object.entries(replacements).forEach(([k, v]) => {
-            text = text.replace(new RegExp(`:${k}`, 'g'), v);
-        });
+        Object.entries(replacements)
+            .sort((a, b) => b[0].length - a[0].length)
+            .forEach(([k, v]) => {
+                text = text.replace(new RegExp(`:${k}`, 'g'), v);
+            });
         return text;
     };
 
@@ -46,9 +48,11 @@ export const i18n = {
             if (typeof text === 'string' && text.includes('|')) {
                 text = text.split('|')[0];
             }
-            Object.entries(replacements ?? {}).forEach(([k, v]) => {
-                text = text.replace(new RegExp(`:${k}`, 'g'), v);
-            });
+            Object.entries(replacements ?? {})
+                .sort((a, b) => b[0].length - a[0].length)
+                .forEach(([k, v]) => {
+                    text = text.replace(new RegExp(`:${k}`, 'g'), v);
+                });
             return text;
         };
     },

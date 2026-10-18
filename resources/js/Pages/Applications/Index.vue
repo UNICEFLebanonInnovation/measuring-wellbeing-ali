@@ -55,7 +55,7 @@ const locName = (g) => (locale.value === 'ar' && g.arabic ? g.arabic : g.name);
 
     <form class="card mb-4 grid grid-cols-2 gap-3 p-4 md:grid-cols-4 lg:grid-cols-8" @submit.prevent="apply">
         <input v-model="form.code" class="input col-span-2" :placeholder="t('ui.code')" />
-        <select v-model="form.status" class="input">
+        <select v-model="form.status" class="input min-w-36">
             <option value="">{{ t('ui.status') }}: {{ t('ui.all') }}</option>
             <option v-for="s in statuses" :key="s.id" :value="s.id">{{ s.name }}</option>
         </select>
@@ -67,7 +67,7 @@ const locName = (g) => (locale.value === 'ar' && g.arabic ? g.arabic : g.name);
             <option value="">{{ t('ui.collector') }}: {{ t('ui.all') }}</option>
             <option v-for="c in collectors" :key="c.id" :value="c.id">{{ c.name }}</option>
         </select>
-        <select v-model="form.governorate" class="input">
+        <select v-model="form.governorate" class="input min-w-40">
             <option value="">{{ t('ui.governorate') }}: {{ t('ui.all') }}</option>
             <option v-for="g in governorates" :key="g.id" :value="g.id">{{ locName(g) }}</option>
         </select>
