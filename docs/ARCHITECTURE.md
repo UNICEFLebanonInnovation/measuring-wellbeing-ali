@@ -2,6 +2,10 @@
 
 Target architecture of the modernised Measuring Well-Being (SDQ) platform. The decision record is in [SYSTEM_REVIEW_REPORT.md](SYSTEM_REVIEW_REPORT.md); this document describes what is being built.
 
+![System architecture: components, network boundaries, data flows and external connections](diagrams/system-architecture.svg)
+
+*Box-and-arrow overview (`docs/diagrams/system-architecture.svg`, PNG alongside). Regenerate from the SVG; it is the reference picture for the sections below.*
+
 ## 1. Why "evolve" (Option A)
 
 The legacy system is a Laravel 5.8 monolith with a small, clear data model and years of production data whose semantics (statuses, codes, scoring) partners are trained on. Rebuilding on a different stack would force a re-derivation of every rule and a riskier data translation. Evolving keeps:
