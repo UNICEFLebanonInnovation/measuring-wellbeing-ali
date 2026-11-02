@@ -4,7 +4,7 @@ Target architecture of the modernised Measuring Well-Being (SDQ) platform. The d
 
 ![System architecture: components, network boundaries, data flows and external connections](diagrams/system-architecture.svg)
 
-*Box-and-arrow overview (`docs/diagrams/system-architecture.svg`, PNG alongside). The business view (stakeholders, measurement process, capabilities, information, rules) is in `docs/diagrams/business-architecture.svg`.*
+*Overview in the ICTD template layout: user access, public internet, application network, external integrations, hosting infrastructure (`docs/diagrams/system-architecture.svg`, PNG alongside). The business view (stakeholders, measurement process, capabilities, information, rules) is in `docs/diagrams/business-architecture.svg`.*
 
 ## 1. Why "evolve" (Option A)
 
