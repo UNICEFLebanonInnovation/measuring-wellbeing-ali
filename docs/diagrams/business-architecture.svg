@@ -1,0 +1,201 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1560" height="1030" viewBox="0 0 1560 1030" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<defs><marker id="ah" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,1 L9,5 L0,9 z" fill="context-stroke"/></marker></defs>
+<rect width="1560" height="1030" fill="#FFFFFF"/>
+<text x="20" y="34" font-size="20" font-weight="700" fill="#104A79">Measuring Well-Being · business architecture</text>
+<text x="1540" y="34" text-anchor="end" font-size="12" fill="#94A3B8">Strengths and Difficulties Questionnaire (SDQ) outcome measurement for focused psychosocial support programmes in Lebanon</text>
+<rect x="20" y="55" width="1520" height="150" rx="12" fill="#FFFFFF" stroke="#334155" stroke-width="1.5"/>
+<text x="32" y="75" font-size="14" font-weight="700" fill="#334155">1 · Stakeholders and roles</text>
+<rect x="40" y="85" width="240" height="105" rx="8" fill="#FFFFFF" stroke="#1B75BC" stroke-width="1.5"/>
+<rect x="40" y="85" width="240" height="26" rx="8" fill="#E8F1FA"/><rect x="40" y="99" width="240" height="12" fill="#E8F1FA"/>
+<text x="160.0" y="103" text-anchor="middle" font-size="13" font-weight="700" fill="#104A79">UNICEF Lebanon · Child Protection</text>
+<text x="160.0" y="129" text-anchor="middle" font-size="11" fill="#334155">programme owner</text>
+<text x="160.0" y="144" text-anchor="middle" font-size="11" fill="#334155">defines the SDQ measurement</text>
+<text x="160.0" y="159" text-anchor="middle" font-size="11" fill="#334155">oversees partners, reads reports</text>
+<rect x="290" y="85" width="240" height="105" rx="8" fill="#FFFFFF" stroke="#1B75BC" stroke-width="1.5"/>
+<rect x="290" y="85" width="240" height="26" rx="8" fill="#E8F1FA"/><rect x="290" y="99" width="240" height="12" fill="#E8F1FA"/>
+<text x="410.0" y="103" text-anchor="middle" font-size="13" font-weight="700" fill="#104A79">Information management focal point</text>
+<text x="410.0" y="129" text-anchor="middle" font-size="11" fill="#334155">administers the platform</text>
+<text x="410.0" y="144" text-anchor="middle" font-size="11" fill="#334155">creates partners, users, quotas</text>
+<text x="410.0" y="159" text-anchor="middle" font-size="11" fill="#334155">data quality and exports</text>
+<rect x="540" y="85" width="240" height="105" rx="8" fill="#FFFFFF" stroke="#1B75BC" stroke-width="1.5"/>
+<rect x="540" y="85" width="240" height="26" rx="8" fill="#E8F1FA"/><rect x="540" y="99" width="240" height="12" fill="#E8F1FA"/>
+<text x="660.0" y="103" text-anchor="middle" font-size="13" font-weight="700" fill="#104A79">Partner NGOs (about a dozen)</text>
+<text x="660.0" y="129" text-anchor="middle" font-size="11" fill="#334155">run focused PSS activities</text>
+<text x="660.0" y="144" text-anchor="middle" font-size="11" fill="#334155">manage their collectors</text>
+<text x="660.0" y="159" text-anchor="middle" font-size="11" fill="#334155">see their own results</text>
+<rect x="790" y="85" width="240" height="105" rx="8" fill="#FFFFFF" stroke="#1B75BC" stroke-width="1.5"/>
+<rect x="790" y="85" width="240" height="26" rx="8" fill="#E8F1FA"/><rect x="790" y="99" width="240" height="12" fill="#E8F1FA"/>
+<text x="910.0" y="103" text-anchor="middle" font-size="13" font-weight="700" fill="#104A79">Collectors / case workers</text>
+<text x="910.0" y="129" text-anchor="middle" font-size="11" fill="#334155">enrol children, obtain consent</text>
+<text x="910.0" y="144" text-anchor="middle" font-size="11" fill="#334155">administer pre-test and post-test</text>
+<text x="910.0" y="159" text-anchor="middle" font-size="11" fill="#334155">online or offline on tablets</text>
+<rect x="1040" y="85" width="240" height="105" rx="8" fill="#FFFFFF" stroke="#1B75BC" stroke-width="1.5"/>
+<rect x="1040" y="85" width="240" height="26" rx="8" fill="#E8F1FA"/><rect x="1040" y="99" width="240" height="12" fill="#E8F1FA"/>
+<text x="1160.0" y="103" text-anchor="middle" font-size="13" font-weight="700" fill="#104A79">Children (6–17) and caregivers</text>
+<text x="1160.0" y="129" text-anchor="middle" font-size="11" fill="#334155">answer the questionnaire</text>
+<text x="1160.0" y="144" text-anchor="middle" font-size="11" fill="#334155">caregiver for 6–11,</text>
+<text x="1160.0" y="159" text-anchor="middle" font-size="11" fill="#334155">self-report for 12–17</text>
+<rect x="1290" y="85" width="240" height="105" rx="8" fill="#FFFFFF" stroke="#1B75BC" stroke-width="1.5"/>
+<rect x="1290" y="85" width="240" height="26" rx="8" fill="#E8F1FA"/><rect x="1290" y="99" width="240" height="12" fill="#E8F1FA"/>
+<text x="1410.0" y="103" text-anchor="middle" font-size="13" font-weight="700" fill="#104A79">Donors and coordination bodies</text>
+<text x="1410.0" y="129" text-anchor="middle" font-size="11" fill="#334155">UNICEF, UNHCR, ERF, BPRM, SiDA…</text>
+<text x="1410.0" y="144" text-anchor="middle" font-size="11" fill="#334155">receive outcome reporting</text>
+<text x="1410.0" y="159" text-anchor="middle" font-size="11" fill="#334155">per partner and governorate</text>
+<rect x="20" y="225" width="1520" height="125" rx="12" fill="#F8FAFC" stroke="#104A79" stroke-width="1.5"/>
+<text x="32" y="245" font-size="14" font-weight="700" fill="#104A79">2 · Measurement process (one cycle per child, programme year as reporting period)</text>
+<polygon points="40,255 234,255 250,295.0 234,335 40,335" fill="#E8F1FA" stroke="#1B75BC" stroke-width="1.5"/>
+<text x="149.0" y="277" text-anchor="middle" font-size="13" font-weight="700" fill="#104A79">Set up programme</text>
+<text x="149.0" y="297" text-anchor="middle" font-size="11" fill="#334155">partner, prefix, quota/year,</text>
+<text x="149.0" y="311" text-anchor="middle" font-size="11" fill="#334155">collectors, donors, agencies</text>
+<polygon points="252,255 446,255 462,295.0 446,335 252,335 268,295.0" fill="#FFFFFF" stroke="#1B75BC" stroke-width="1.5"/>
+<text x="361.0" y="277" text-anchor="middle" font-size="13" font-weight="700" fill="#104A79">Enrol child</text>
+<text x="361.0" y="297" text-anchor="middle" font-size="11" fill="#334155">consent script read,</text>
+<text x="361.0" y="311" text-anchor="middle" font-size="11" fill="#334155">permission yes/no, code assigned</text>
+<polygon points="464,255 658,255 674,295.0 658,335 464,335 480,295.0" fill="#E8F1FA" stroke="#1B75BC" stroke-width="1.5"/>
+<text x="573.0" y="277" text-anchor="middle" font-size="13" font-weight="700" fill="#104A79">Pre-test (SDQ)</text>
+<text x="573.0" y="297" text-anchor="middle" font-size="11" fill="#334155">25 items, child &amp; location</text>
+<text x="573.0" y="311" text-anchor="middle" font-size="11" fill="#334155">details, GPS, draft or submit</text>
+<polygon points="676,255 870,255 886,295.0 870,335 676,335 692,295.0" fill="#FFFFFF" stroke="#1B75BC" stroke-width="1.5"/>
+<text x="785.0" y="277" text-anchor="middle" font-size="13" font-weight="700" fill="#104A79">PSS programme</text>
+<text x="785.0" y="297" text-anchor="middle" font-size="11" fill="#334155">child attends activities</text>
+<text x="785.0" y="311" text-anchor="middle" font-size="11" fill="#334155">hours tracked by the partner</text>
+<polygon points="888,255 1082,255 1098,295.0 1082,335 888,335 904,295.0" fill="#E8F1FA" stroke="#1B75BC" stroke-width="1.5"/>
+<text x="997.0" y="277" text-anchor="middle" font-size="13" font-weight="700" fill="#104A79">Post-test (SDQ)</text>
+<text x="997.0" y="297" text-anchor="middle" font-size="11" fill="#334155">same 25 items + attendance,</text>
+<text x="997.0" y="311" text-anchor="middle" font-size="11" fill="#334155">dropout reason if any</text>
+<polygon points="1100,255 1294,255 1310,295.0 1294,335 1100,335 1116,295.0" fill="#FFFFFF" stroke="#1B75BC" stroke-width="1.5"/>
+<text x="1209.0" y="277" text-anchor="middle" font-size="13" font-weight="700" fill="#104A79">Score and classify</text>
+<text x="1209.0" y="297" text-anchor="middle" font-size="11" fill="#334155">5 scales + total, NA rule,</text>
+<text x="1209.0" y="311" text-anchor="middle" font-size="11" fill="#334155">Increase / Decrease, justification</text>
+<polygon points="1312,255 1506,255 1522,295.0 1506,335 1312,335 1328,295.0" fill="#E8F1FA" stroke="#1B75BC" stroke-width="1.5"/>
+<text x="1421.0" y="277" text-anchor="middle" font-size="13" font-weight="700" fill="#104A79">Report and decide</text>
+<text x="1421.0" y="297" text-anchor="middle" font-size="11" fill="#334155">dashboards, exports, analysis</text>
+<text x="1421.0" y="311" text-anchor="middle" font-size="11" fill="#334155">by partner, area, age band</text>
+<rect x="20" y="370" width="1520" height="180" rx="12" fill="#FFFFFF" stroke="#15803D" stroke-width="1.5"/>
+<text x="32" y="390" font-size="14" font-weight="700" fill="#15803D">3 · Business capabilities (what the platform must provide)</text>
+<rect x="40" y="400" width="292" height="135" rx="8" fill="#FFFFFF" stroke="#15803D" stroke-width="1.5"/>
+<rect x="40" y="400" width="292" height="26" rx="8" fill="#DCFCE7"/><rect x="40" y="414" width="292" height="12" fill="#DCFCE7"/>
+<text x="186.0" y="418" text-anchor="middle" font-size="13" font-weight="700" fill="#104A79">Programme management</text>
+<text x="186.0" y="444" text-anchor="middle" font-size="11" fill="#334155">partner and quota management</text>
+<text x="186.0" y="459" text-anchor="middle" font-size="11" fill="#334155">collector and user management</text>
+<text x="186.0" y="474" text-anchor="middle" font-size="11" fill="#334155">roles: admin · partner · collector</text>
+<text x="186.0" y="489" text-anchor="middle" font-size="11" fill="#334155">reference data: governorate,</text>
+<text x="186.0" y="504" text-anchor="middle" font-size="11" fill="#334155">caza, area, statuses, forms</text>
+<rect x="342" y="400" width="292" height="135" rx="8" fill="#FFFFFF" stroke="#15803D" stroke-width="1.5"/>
+<rect x="342" y="400" width="292" height="26" rx="8" fill="#DCFCE7"/><rect x="342" y="414" width="292" height="12" fill="#DCFCE7"/>
+<text x="488.0" y="418" text-anchor="middle" font-size="13" font-weight="700" fill="#104A79">Data collection</text>
+<text x="488.0" y="444" text-anchor="middle" font-size="11" fill="#334155">consent and permission handling</text>
+<text x="488.0" y="459" text-anchor="middle" font-size="11" fill="#334155">Form 6-11 (caregiver) and</text>
+<text x="488.0" y="474" text-anchor="middle" font-size="11" fill="#334155">Form 12-17 (self-report), EN / AR</text>
+<text x="488.0" y="489" text-anchor="middle" font-size="11" fill="#334155">offline capture on tablets, sync</text>
+<text x="488.0" y="504" text-anchor="middle" font-size="11" fill="#334155">location and GPS capture</text>
+<rect x="644" y="400" width="292" height="135" rx="8" fill="#FFFFFF" stroke="#15803D" stroke-width="1.5"/>
+<rect x="644" y="400" width="292" height="26" rx="8" fill="#DCFCE7"/><rect x="644" y="414" width="292" height="12" fill="#DCFCE7"/>
+<text x="790.0" y="418" text-anchor="middle" font-size="13" font-weight="700" fill="#104A79">Application lifecycle</text>
+<text x="790.0" y="444" text-anchor="middle" font-size="11" fill="#334155">server-assigned codes</text>
+<text x="790.0" y="459" text-anchor="middle" font-size="11" fill="#334155">year-partner-collector-n</text>
+<text x="790.0" y="474" text-anchor="middle" font-size="11" fill="#334155">status workflow: pre-test →</text>
+<text x="790.0" y="489" text-anchor="middle" font-size="11" fill="#334155">post-test → done / dropout / NA</text>
+<text x="790.0" y="504" text-anchor="middle" font-size="11" fill="#334155">draft vs. submitted, locking</text>
+<rect x="946" y="400" width="292" height="135" rx="8" fill="#FFFFFF" stroke="#15803D" stroke-width="1.5"/>
+<rect x="946" y="400" width="292" height="26" rx="8" fill="#DCFCE7"/><rect x="946" y="414" width="292" height="12" fill="#DCFCE7"/>
+<text x="1092.0" y="418" text-anchor="middle" font-size="13" font-weight="700" fill="#104A79">Measurement and quality</text>
+<text x="1092.0" y="444" text-anchor="middle" font-size="11" fill="#334155">automatic SDQ scoring</text>
+<text x="1092.0" y="459" text-anchor="middle" font-size="11" fill="#334155">(documented or legacy policy)</text>
+<text x="1092.0" y="474" text-anchor="middle" font-size="11" fill="#334155">NA threshold (&gt; 3 → not applicable)</text>
+<text x="1092.0" y="489" text-anchor="middle" font-size="11" fill="#334155">change analysis Increase / Decrease</text>
+<text x="1092.0" y="504" text-anchor="middle" font-size="11" fill="#334155">justification of decreases, audit log</text>
+<rect x="1248" y="400" width="292" height="135" rx="8" fill="#FFFFFF" stroke="#15803D" stroke-width="1.5"/>
+<rect x="1248" y="400" width="292" height="26" rx="8" fill="#DCFCE7"/><rect x="1248" y="414" width="292" height="12" fill="#DCFCE7"/>
+<text x="1394.0" y="418" text-anchor="middle" font-size="13" font-weight="700" fill="#104A79">Insight and reporting</text>
+<text x="1394.0" y="444" text-anchor="middle" font-size="11" fill="#334155">dashboard per partner and status</text>
+<text x="1394.0" y="459" text-anchor="middle" font-size="11" fill="#334155">reports: dropout, normal / borderline /</text>
+<text x="1394.0" y="474" text-anchor="middle" font-size="11" fill="#334155">abnormal bands, governorate, change</text>
+<text x="1394.0" y="489" text-anchor="middle" font-size="11" fill="#334155">CSV / Excel export</text>
+<text x="1394.0" y="504" text-anchor="middle" font-size="11" fill="#334155">APK distribution to the field</text>
+<rect x="20" y="570" width="1000" height="150" rx="12" fill="#FFFFFF" stroke="#6D28D9" stroke-width="1.5"/>
+<text x="32" y="590" font-size="14" font-weight="700" fill="#6D28D9">4 · Core information objects</text>
+<rect x="40" y="600" width="186" height="105" rx="8" fill="#FFFFFF" stroke="#6D28D9" stroke-width="1.5"/>
+<rect x="40" y="600" width="186" height="26" rx="8" fill="#EDE9FE"/><rect x="40" y="614" width="186" height="12" fill="#EDE9FE"/>
+<text x="133.0" y="618" text-anchor="middle" font-size="13" font-weight="700" fill="#104A79">Partner</text>
+<text x="133.0" y="644" text-anchor="middle" font-size="11" fill="#334155">name, prefix, logo,</text>
+<text x="133.0" y="659" text-anchor="middle" font-size="11" fill="#334155">max applications / year,</text>
+<text x="133.0" y="674" text-anchor="middle" font-size="11" fill="#334155">donors, agencies</text>
+<rect x="234" y="600" width="186" height="105" rx="8" fill="#FFFFFF" stroke="#6D28D9" stroke-width="1.5"/>
+<rect x="234" y="600" width="186" height="26" rx="8" fill="#EDE9FE"/><rect x="234" y="614" width="186" height="12" fill="#EDE9FE"/>
+<text x="327.0" y="618" text-anchor="middle" font-size="13" font-weight="700" fill="#104A79">Collector</text>
+<text x="327.0" y="644" text-anchor="middle" font-size="11" fill="#334155">person, prefix, partner,</text>
+<text x="327.0" y="659" text-anchor="middle" font-size="11" fill="#334155">login (email)</text>
+<rect x="428" y="600" width="186" height="105" rx="8" fill="#FFFFFF" stroke="#6D28D9" stroke-width="1.5"/>
+<rect x="428" y="600" width="186" height="26" rx="8" fill="#EDE9FE"/><rect x="428" y="614" width="186" height="12" fill="#EDE9FE"/>
+<text x="521.0" y="618" text-anchor="middle" font-size="13" font-weight="700" fill="#104A79">Application</text>
+<text x="521.0" y="644" text-anchor="middle" font-size="11" fill="#334155">code, year, status, partner,</text>
+<text x="521.0" y="659" text-anchor="middle" font-size="11" fill="#334155">collector, dates, change</text>
+<rect x="622" y="600" width="186" height="105" rx="8" fill="#FFFFFF" stroke="#6D28D9" stroke-width="1.5"/>
+<rect x="622" y="600" width="186" height="26" rx="8" fill="#EDE9FE"/><rect x="622" y="614" width="186" height="12" fill="#EDE9FE"/>
+<text x="715.0" y="618" text-anchor="middle" font-size="13" font-weight="700" fill="#104A79">Pre-test / Post-test</text>
+<text x="715.0" y="644" text-anchor="middle" font-size="11" fill="#334155">child details, consent, location,</text>
+<text x="715.0" y="659" text-anchor="middle" font-size="11" fill="#334155">25 answers, attendance,</text>
+<text x="715.0" y="674" text-anchor="middle" font-size="11" fill="#334155">dropout, scores</text>
+<rect x="816" y="600" width="186" height="105" rx="8" fill="#FFFFFF" stroke="#6D28D9" stroke-width="1.5"/>
+<rect x="816" y="600" width="186" height="26" rx="8" fill="#EDE9FE"/><rect x="816" y="614" width="186" height="12" fill="#EDE9FE"/>
+<text x="909.0" y="618" text-anchor="middle" font-size="13" font-weight="700" fill="#104A79">Reference data</text>
+<text x="909.0" y="644" text-anchor="middle" font-size="11" fill="#334155">governorate › caza › area,</text>
+<text x="909.0" y="659" text-anchor="middle" font-size="11" fill="#334155">statuses, forms, option lists</text>
+<rect x="1040" y="570" width="500" height="150" rx="12" fill="#FFFFFF" stroke="#B45309" stroke-width="1.5"/>
+<text x="1052" y="590" font-size="14" font-weight="700" fill="#B45309">5 · Business rules and policies</text>
+<text x="1056" y="602" font-size="11.5" fill="#334155">• Consent first: no permission → application closed, nothing else recorded</text>
+<text x="1056" y="618" font-size="11.5" fill="#334155">• Codes are generated by the server; devices never invent them</text>
+<text x="1056" y="634" font-size="11.5" fill="#334155">• One partner quota per year; collectors see only their own applications</text>
+<text x="1056" y="650" font-size="11.5" fill="#334155">• More than 3 &#x27;no answer&#x27; items → application marked Not Applicable</text>
+<text x="1056" y="666" font-size="11.5" fill="#334155">• Submitted questionnaires are locked; decreases need a justification</text>
+<text x="1056" y="682" font-size="11.5" fill="#334155">• Scores are computed centrally with one agreed scoring policy</text>
+<text x="1056" y="698" font-size="11.5" fill="#334155">• Data anonymised by code; no child names stored</text>
+<rect x="20" y="740" width="1520" height="135" rx="12" fill="#F8FAFC" stroke="#1B75BC" stroke-width="1.5"/>
+<text x="32" y="760" font-size="14" font-weight="700" fill="#1B75BC">6 · Supporting applications and services</text>
+<rect x="40" y="770" width="240" height="90" rx="8" fill="#FFFFFF" stroke="#1B75BC" stroke-width="1.5"/>
+<rect x="40" y="770" width="240" height="26" rx="8" fill="#E8F1FA"/><rect x="40" y="784" width="240" height="12" fill="#E8F1FA"/>
+<text x="160.0" y="788" text-anchor="middle" font-size="13" font-weight="700" fill="#104A79">Web platform (dashboard)</text>
+<text x="160.0" y="814" text-anchor="middle" font-size="11" fill="#334155">administration, data entry,</text>
+<text x="160.0" y="829" text-anchor="middle" font-size="11" fill="#334155">reports, exports · all roles</text>
+<rect x="290" y="770" width="240" height="90" rx="8" fill="#FFFFFF" stroke="#1B75BC" stroke-width="1.5"/>
+<rect x="290" y="770" width="240" height="26" rx="8" fill="#E8F1FA"/><rect x="290" y="784" width="240" height="12" fill="#E8F1FA"/>
+<text x="410.0" y="788" text-anchor="middle" font-size="13" font-weight="700" fill="#104A79">Mobile app (Android tablets)</text>
+<text x="410.0" y="814" text-anchor="middle" font-size="11" fill="#334155">offline collection by collectors,</text>
+<text x="410.0" y="829" text-anchor="middle" font-size="11" fill="#334155">sync when online</text>
+<rect x="540" y="770" width="240" height="90" rx="8" fill="#FFFFFF" stroke="#1B75BC" stroke-width="1.5"/>
+<rect x="540" y="770" width="240" height="26" rx="8" fill="#E8F1FA"/><rect x="540" y="784" width="240" height="12" fill="#E8F1FA"/>
+<text x="660.0" y="788" text-anchor="middle" font-size="13" font-weight="700" fill="#104A79">API v1 + legacy API</text>
+<text x="660.0" y="814" text-anchor="middle" font-size="11" fill="#334155">contract between app and platform;</text>
+<text x="660.0" y="829" text-anchor="middle" font-size="11" fill="#334155">legacy kept during transition</text>
+<rect x="790" y="770" width="240" height="90" rx="8" fill="#FFFFFF" stroke="#1B75BC" stroke-width="1.5"/>
+<rect x="790" y="770" width="240" height="26" rx="8" fill="#E8F1FA"/><rect x="790" y="784" width="240" height="12" fill="#E8F1FA"/>
+<text x="910.0" y="788" text-anchor="middle" font-size="13" font-weight="700" fill="#104A79">Database and files</text>
+<text x="910.0" y="814" text-anchor="middle" font-size="11" fill="#334155">single source of truth, backups,</text>
+<text x="910.0" y="829" text-anchor="middle" font-size="11" fill="#334155">partner logos, APK downloads</text>
+<rect x="1040" y="770" width="240" height="90" rx="8" fill="#FFFFFF" stroke="#1B75BC" stroke-width="1.5"/>
+<rect x="1040" y="770" width="240" height="26" rx="8" fill="#E8F1FA"/><rect x="1040" y="784" width="240" height="12" fill="#E8F1FA"/>
+<text x="1160.0" y="788" text-anchor="middle" font-size="13" font-weight="700" fill="#104A79">Identity and access</text>
+<text x="1160.0" y="814" text-anchor="middle" font-size="11" fill="#334155">local accounts, roles, API tokens;</text>
+<text x="1160.0" y="829" text-anchor="middle" font-size="11" fill="#334155">Entra ID option for admins</text>
+<rect x="1290" y="770" width="240" height="90" rx="8" fill="#FFFFFF" stroke="#1B75BC" stroke-width="1.5"/>
+<rect x="1290" y="770" width="240" height="26" rx="8" fill="#E8F1FA"/><rect x="1290" y="784" width="240" height="12" fill="#E8F1FA"/>
+<text x="1410.0" y="788" text-anchor="middle" font-size="13" font-weight="700" fill="#104A79">Hosting and operations</text>
+<text x="1410.0" y="814" text-anchor="middle" font-size="11" fill="#334155">Azure Container Apps, Key Vault,</text>
+<text x="1410.0" y="829" text-anchor="middle" font-size="11" fill="#334155">monitoring, CI/CD from GitHub</text>
+<rect x="20" y="895" width="1520" height="100" rx="12" fill="#FFFFFF" stroke="#334155" stroke-width="1.5"/>
+<text x="32" y="915" font-size="14" font-weight="700" fill="#334155">7 · Outcomes and indicators the business reads from the system</text>
+<text x="40" y="932" font-size="11.5" fill="#334155">• Share of children whose total difficulties score improved (Increase) after the programme</text>
+<text x="545" y="932" font-size="11.5" fill="#334155">• Distribution normal / borderline / abnormal per scale and age band, pre vs post</text>
+<text x="1050" y="932" font-size="11.5" fill="#334155">• Coverage: applications per partner, governorate and year against quota</text>
+<text x="40" y="952" font-size="11.5" fill="#334155">• Dropout rate and reasons; uncompleted post-tests per partner</text>
+<text x="545" y="952" font-size="11.5" fill="#334155">• Data quality: not-applicable rate, pending submissions, unjustified decreases</text>
+<path d="M 145,335 L 145,370" stroke="#94A3B8" stroke-width="1" stroke-dasharray="3 3"/>
+<path d="M 357,335 L 357,370" stroke="#94A3B8" stroke-width="1" stroke-dasharray="3 3"/>
+<path d="M 569,335 L 569,370" stroke="#94A3B8" stroke-width="1" stroke-dasharray="3 3"/>
+<path d="M 781,335 L 781,370" stroke="#94A3B8" stroke-width="1" stroke-dasharray="3 3"/>
+<path d="M 993,335 L 993,370" stroke="#94A3B8" stroke-width="1" stroke-dasharray="3 3"/>
+<path d="M 1205,335 L 1205,370" stroke="#94A3B8" stroke-width="1" stroke-dasharray="3 3"/>
+<path d="M 1417,335 L 1417,370" stroke="#94A3B8" stroke-width="1" stroke-dasharray="3 3"/>
+<text x="1538" y="1018" text-anchor="end" font-size="11" fill="#94A3B8">docs/diagrams/business-architecture.svg · November 2026</text>
+</svg>
